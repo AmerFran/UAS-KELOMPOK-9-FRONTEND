@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: 'Exo 2', sans-serif;
+    background-color: #f3f7f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.full-width-banner {
+    width: 100%;
+    background-color: #f6e3ba;
+    padding: 35px 0;
+    text-align: center;
+    color: #333;
+}
+
+.full-width-banner h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+#descriptionContainer, #ingredientsContainer, #instructionContainer {
+    background-color: #f6e3ba;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 2px solid #fbd886;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+
+#descriptionContainer h2, #ingredientsContainer h2, #instructionContainer h2 {
+    font-size: 1.6em;
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+a {
+    display: inline-block;
+    background-color: #f3d38f;
+    color: black;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    background-color: #efcb7f;
+}
+
+#imageContainer img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+ul, ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+#ingredientsContainer ul {
+    padding-left: 20px;
+}
+
+#ingredientsContainer li::before {
+    content: "•";
+    color: #000000;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em; 
+}
+
+@media (max-width: 768px) {
+    .full-width-banner h1 {
+        font-size: 2.5em;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    #descriptionContainer, #ingredientsContainer, #instructionContainer {
+        padding: 0px;
+    }
+
+    #descriptionContainer h2, #ingredientsContainer h2, #instructionContainer h2 {
+        font-size: 1.4em;
+    }
+
+    a {
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .full-width-banner h1 {
+        font-size: 2em; 
+    }
+
+    #descriptionContainer, #ingredientsContainer, #instructionContainer {
+        padding: 10px; 
+    }
+
+    #descriptionContainer h2, #ingredientsContainer h2, #instructionContainer h2 {
+        font-size: 1.2em;
+    }
+}

@@ -1,0 +1,538 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+
+:root {
+    --main-color: green;
+    --primary: white;
+    --black: #141414;
+    --white: white;
+    --bg: white;
+    --light-black: #666;
+    --text-color: var(--black); /* Menambahkan variabel untuk teks */
+}
+
+* {
+    font-family: 'Playwrite', sans-serif;
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden; /* Menghilangkan overflow horizontal */
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+}
+
+html::-webkit-scrollbar {
+    width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+    width: 1rem;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+}
+
+section {
+    padding: 3rem 9%;
+}
+
+.heading {
+    text-align: center;
+    color: var(--main-color);
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+    font-size: 4rem;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 1rem 3rem;
+    border: .1rem solid var(--main-color);
+    border-radius: .5rem;
+    cursor: pointer;
+    font-size: 1.7rem;
+    color: var(--white); 
+    background: var(--main-color); 
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); 
+}
+
+.btn:hover {
+    background: var(--white); 
+    color: var(--main-color); 
+    border: .1rem solid var(--main-color); 
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 9%;
+    background: var(--primary);
+    box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.header .logo {
+    font-size: 2.2rem;
+    font-weight: bolder;
+    color: var(--main-color);
+}
+
+.header .navbar a {
+    font-size: 1.7rem;
+    margin-left: 2rem;
+    color: var(--black);
+}
+
+.header .navbar a:hover {
+    color: var(--main-color);
+}
+
+#menu {
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: var(--main-color);
+    display: none;
+}
+
+.home {
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(image/home.jpg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.home .content {
+    max-width: 60rem;
+    text-align: center;
+}
+
+.home .content h3 {
+    font-size: 4.5rem; 
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--white);
+    padding-bottom: 3.5rem;
+}
+
+/* About Section */
+.about .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+}
+
+.about .row .content {
+    flex: 1 1 40rem;
+}
+
+.about .row .content h3 {
+    font-size: 3.5rem;
+    color: var(--black);
+    text-transform: uppercase;
+}
+
+.about .row .content p {
+    font-size: 1.6rem;
+    color: var(--light-black);
+    padding: 2rem 0;
+    line-height: 2;
+}
+
+.about .row .image {
+    flex: 1 1 40rem;
+}
+
+.about .row .image img {
+    width: 100%;
+    max-width: 100%; /* Memastikan responsif */
+    height: auto; /* Memastikan rasio aspek tetap */
+}
+/* About Section End Here */
+
+
+/* Service Section */
+.services {
+    background: var(--bg);
+}
+
+.services .heading {
+    margin-bottom: 15rem;
+}
+
+.services .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 2rem;
+    margin-top: 8rem;
+}
+
+.services .box-container .box {
+    text-align: center;
+    padding: 3rem;
+    background: var(--white);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    border-bottom: 8rem;
+}
+
+.services .box-container .box:hover {
+    background: var(--primary);
+}
+
+.services .box-container .box .icon:hover {
+    background: var(--primary);
+}
+
+.services .box-container .box .icon {
+    width: 13rem;
+    height: 13rem;
+    line-height: 13rem;
+    background: var(--white);
+    border-radius: 50%;
+    margin: -11rem auto 2rem;
+    border: 1.8rem solid var(--bg);
+    overflow: hidden;
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+}
+
+.services .box-container .box .icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 50%; 
+}
+
+.services .box-container .box .content h3 {
+    font-size: 2rem;
+    padding: 1rem 0;
+    color: var(--main-color);
+}
+
+.services .box-container .box .content .line {
+    background: var(--main-color);
+    width: 30%;
+    height: .4rem;
+    margin: 2rem auto;
+    border-radius: 5rem;
+}
+
+.services .box-container .box .content p {
+    font-size: 1.4rem;
+    color: var(--black);
+    line-height: 2;
+    text-align: justify; 
+}
+
+.services .box-container .box .content ul {
+    margin: 2rem 0;
+    list-style: none;
+    padding-left: 0; 
+}
+
+.services .box-container .box .content ul li {
+    padding: 0.5rem 0; 
+    font-size: 1.4rem;
+    color: var(--black);
+    display: flex; 
+    align-items: center; 
+}
+
+.services .box-container .box .content ul li i {
+    font-size: 1.4rem;
+    margin-right: 1rem; 
+    background-color: var(--main-color);
+    border-radius: 50%;
+    padding: 0.5rem; 
+}
+/* Service Section End Here */
+
+.controls {
+    display: flex;
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+}
+
+.controls li {
+    list-style: none; 
+    text-align: center;
+    margin: 10px; 
+}
+
+.controls img {
+    width: 300px; 
+    height: 300px;
+    object-fit: cover;
+}
+
+.diet {
+    margin-top: 15rem;
+}
+
+.diet .heading {
+    margin-bottom: 4rem;
+}
+
+.diet .controls .buttons {
+    padding: 3rem 2rem;
+    background: var(--white);
+    cursor: pointer;
+    margin-bottom: 3rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 1rem;
+}
+
+.diet .controls .buttons h3 {
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    color: var(--light-black);
+}
+
+.diet .controls .buttons.active {
+    background: var(--primary);
+}
+
+.diet .image-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 1.5rem;
+}
+
+.diet .image-container .box {
+    background: var(--white);
+    border-radius: 1rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.diet .image-container .box:hover .image img {
+    transform: scale(1.1);
+}
+
+.diet .image-container .box .image {
+    height: 25rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+.diet .image-container .box .image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.diet .image-container .box .content {
+    padding: 2rem;
+}
+
+.diet .image-container .box .content .link {
+    font-size: 2rem;
+    color: var(--main-color);
+}
+
+.diet .image-container .box .content p {
+    padding: 1rem 0;
+    font-size: 1.5rem;
+    color: var(--light-black);
+    line-height: 2;
+}
+
+.diet .image-container .box .content .icon{
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.diet .image-container .box .content .icon a{
+    font-size: 1.4rem;
+    color: var(--light-black);
+}
+
+.diet .image-container .box .content .icon a:hover{
+    color: var(--main-color);
+}
+
+.diet .image-container .box .content .icon a i{
+    padding-right: .5rem;
+    color: var(--main-color);
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0;
+}
+
+.social-icons a {
+    font-size: 3rem;
+    margin: 0 1.5rem;
+    color: var(--main-color);
+}
+
+.copyright {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--light-black);
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 55%;
+    }
+
+    .header {
+        flex-direction: column;
+        padding: 1rem 5%;
+    }
+
+    .header .navbar a {
+        margin: 1rem 0;
+    }
+
+    .home .content h3 {
+        font-size: 3rem;
+    }
+
+    .about .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .services .box-container {
+        grid-template-columns: 1fr;
+    }
+
+    .diet .controls .buttons {
+        padding: 2rem 1rem;
+    }
+
+    .diet .image-container .box {
+        margin-bottom: 2rem;
+    }
+
+    .social-icons a {
+        font-size: 2.5rem; 
+        padding: 0.5rem;
+    }
+
+    .copyright {
+        font-size: 1.5rem;
+    }
+}
+
+    #menu {
+    font-size: 2.5rem; 
+    cursor: pointer; 
+    color: var(--main-color); 
+    display: none; 
+}
+
+    .header .navbar {
+    display: flex;
+}
+
+    .header .navbar a {
+    display: block; 
+    margin-left: 2rem;
+}
+    img {
+    max-width: 100%; 
+    height: auto; 
+}
+
+/* responsif untuk laptop dan resolusi keatas */
+@media (min-width: 769px) and (max-width: 1024px) {
+    html {
+        font-size: 60%; 
+    }
+
+    .header {
+        padding: 1rem 8%;
+    }
+
+    .home .content h3 {
+        font-size: 3.5rem; 
+    }
+
+    .services .box-container {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    .diet .image-container {
+        grid-template-columns: repeat(2, minmax(30rem, 1fr)); 
+    }
+}
+
+/* responsive utk hp / tablet */
+@media (max-width: 768px) {
+    .header .navbar {
+        display: none; 
+        flex-direction: column; 
+        width: 100%; 
+        position: absolute; 
+        top: 5rem; 
+        left: 0; 
+        background: var(--primary); 
+        z-index: 999;
+    }
+
+    .header .navbar.active {
+        display: flex;
+    }
+
+    #menu {
+        display: block; 
+    }
+}
+
+.header .search-container {
+    margin-left: 2rem;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+}
+
+.header .search-container input {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border: 1px solid var(--black);
+    border-radius: 4px; 
+    outline: none;
+    transition: border-color 0.3s;
+    flex-grow: 1; /* Allow input to take available space */
+}
+
+.header .search-container input:focus {
+    border-color: var(--main-color);
+}
+
+.header .search-icon {
+    background: transparent;
+    border: none; 
+    cursor: pointer;
+    font-size: 1.5rem; 
+    margin-left: 0.5rem; 
+}
