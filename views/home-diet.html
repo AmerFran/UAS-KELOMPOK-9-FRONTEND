@@ -60,8 +60,9 @@
                     <img ng-src="{{ recipe.strMealThumb }}" alt="{{ recipe.strMeal }}"/>
                 </div>
                 <div class="content">
-                    <a ng-href="ingredients.html?mealId={{ recipe.idMeal }}&description={{ recipe.description }}" target="_blank" class="link">{{ recipe.strMeal }}</a>
+                    <a href="/views/ingredients.html?mealId={{ recipe.idMeal }}&description={{ recipe.description }}" class="link">{{ recipe.strMeal }}</a>
                     <p>{{ recipe.description }}</p>
+
                     <div class="icon">
                         <a href="#"><i class="fas fa-clock"></i>22 September 2024</a>
                         <a href="#"><i class="fas fa-clock"></i>by Amer</a>
@@ -89,6 +90,6 @@
 </div>
 
 <p class="copyright">© Healthy Living | All Rights Reserved</p>
-<script src="app.js"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>
