@@ -1,95 +1,92 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en" ng-app="healthyLivingApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthy Living</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Healthy Foods</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
 
+<body ng-controller="MainController">
     <header class="header">
-        <a href="#" class="logo">Healthy Living</a> 
-        <div id="menu" onclick="toggleMenu()">&#x1F354;</div> 
+        <a href="#" class="logo">Healthy Living</a>
+        <div id="menu" ng-click="toggleMenu()">&#x1F354;</div> 
         <nav class="navbar">
-            <a href="#!home-diet">Home & Diet</a>
-            <a href="#!about-services">About & Services</a>
-            <a href="#!results">Results</a>
+            <a href="#home">home</a>
+            <a href="#about">about</a>
+            <a href="#services">services</a>
+            <a href="#diet">diet</a>
+            <a href="#result">results</a>
         </nav>
         <div class="search-container">
-            <input type="text" id="searchString">
-            <button class="search-icon" aria-label="Search" id="searchButton">🔍</button>
+            <input type="text" id="searchString" ng-model="searchString">
+            <button class="search-icon" aria-label="Search" ng-click="searchEvent()">
+                🔍
+            </button>
         </div>
     </header>
 
-<section class="home" id="home">
-    <div class="content">
-        <h3>Discover Delicious and Nutritious Recipes for a Healthier You!</h3>
-        <a href="#about" class="btn">read more</a>
-    </div>
-</section>
+    <section class="home" id="home">
+        <div class="content">
+            <h3>Discover Delicious and Nutritious Recipes for a Healthier You!</h3>
+            <a href="#about" class="btn">read more</a>
+        </div>
+    </section>
 
-<section class="diet" id="diet">
-    <h1 class="heading">Diet Plan</h1>
-
-    <ul class="controls">
-        <li class="buttons" ng-click="filterCategory('Seafood')">
-            <img src="../image/monsal.jpg" alt="">
-            <h3>Seafood</h3>    
-        </li>
-        <li class="buttons" ng-click="filterCategory('Side')">
-            <img src="../image/french.jpg" alt="">
-            <h3>Side Dish</h3>    
-        </li>
-        <li class="buttons" ng-click="filterCategory('Vegan')">
-            <img src="../image/veganlag.jpg" alt="">
-            <h3>Vegan</h3>    
-        </li>
-        <li class="buttons" ng-click="filterCategory('Breakfast')">
-            <img src="../image/diet1.jpg" alt="">
-            <h3>Breakfast</h3>    
-        </li>
-    </ul>
-
-    <h1 class="heading" id="result">{{ resultMessage }}</h1>
-
-    <div class="image-container" id="filterResult">
-        <div ng-repeat="recipe in filteredRecipes">
-            <div class="box lunch">
+    <section class="diet" id="diet">
+        <h1 class="heading">diet plan</h1>
+        <ul class="controls">
+            <li ng-repeat="category in categories" ng-click="filterCategory(category.name)">
+                <img ng-src="{{category.image}}" alt="">
+                <h3>{{category.name}}</h3>    
+            </li>
+        </ul>
+        <h1 class="heading" id="result">{{filteredCategory}}</h1>
+        <div class="image-container" id="filterResult">
+            <div class="box" ng-repeat="meal in filteredMeals">
                 <div class="image">
-                    <img ng-src="{{ recipe.strMealThumb }}" alt="{{ recipe.strMeal }}"/>
+                    <img ng-src="{{meal.strMealThumb}}" alt="">
                 </div>
                 <div class="content">
-                    <a href="/views/ingredients.html?mealId={{ recipe.idMeal }}&description={{ recipe.description }}" class="link">{{ recipe.strMeal }}</a>
-                    <p>{{ recipe.description }}</p>
-
+                    <a href="ingredients.html?mealId={{meal.idMeal}}&description={{meal.description}}" target="_blank" class="link">{{meal.strMeal}}</a>
+                    <p>{{meal.description}}</p>
                     <div class="icon">
                         <a href="#"><i class="fas fa-clock"></i>22 September 2024</a>
-                        <a href="#"><i class="fas fa-clock"></i>by Amer</a>
+                        <a href="#"><i class="fas fa-clock"></i>by amer</a>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <div class="social-icons">
+        <a href="https://github.com/AmerFran/KELOMPOK-9-FRONTEND"> 
+            <i class ="bx bxl-github"></i>
+        </a>
+        <a href="https://www.instagram.com/fabliusm/"> 
+            <i class ="bx bxl-instagram-alt"></i>
+        </a>
+        <a href="https://x.com/"> 
+            <i class ="bx bxl-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/amer-f-337088308/"> 
+            <i class ="bx bxl-linkedin-square"></i>
+        </a>
     </div>
-</section>
 
+    <ul class="list">
+    </ul>
+    <p class="copyright">
+        © Healthy Living | All Rights Reserved
+    </p>
 
-<div class="social-icons">
-    <a href="https://github.com/AmerFran/KELOMPOK-9-FRONTEND"> 
-        <i class="bx bxl-github"></i>
-    </a>
-    <a href="https://www.instagram.com/fabliusm/"> 
-        <i class="bx bxl-instagram-alt"></i>
-    </a>
-    <a href="https://x.com/"> 
-        <i class="bx bxl-twitter"></i>
-    </a>
-    <a href="https://www.linkedin.com/in/amer-f-337088308/"> 
-        <i class="bx bxl-linkedin-square"></i>
-    </a>
-</div>
-
-<p class="copyright">© Healthy Living | All Rights Reserved</p>
-<script src="/js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="../controllers/HomeDietController.js"></script>
 </body>
 </html>
