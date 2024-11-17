@@ -1,24 +1,3 @@
-var app = angular.module('healthyLivingApp', ['ngRoute']);
-
-app.config(function($routeProvider) {
-    $routeProvider
-        .when('/', {
-            templateUrl: '/views/home-diet.html',
-            controller: 'HomeDietController'
-        })
-        .when('/about-services', {
-            templateUrl: '/views/about-services.html',
-            controller: 'AboutServicesController'
-        })
-        .when('/results', {
-            templateUrl: '/views/results.html',
-            controller: 'ResultsController'
-        })
-        .otherwise({
-            redirectTo: '/'
-        });
-});
-
 app.controller('HomeDietController', function($scope, $http) {
     $scope.message = "Welcome to Home & Diet page";
     $scope.filteredRecipes = [];
@@ -65,12 +44,4 @@ app.controller('HomeDietController', function($scope, $http) {
                 console.log('Error fetching meal details', error);
             });
     };
-});
-
-app.controller('AboutServicesController', function($scope) {
-    $scope.message = "About Us and Our Services";
-});
-
-app.controller('ResultsController', function($scope) {
-    $scope.message = "Results and Success Stories";
 });
