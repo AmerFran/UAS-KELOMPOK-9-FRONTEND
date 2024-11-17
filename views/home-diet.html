@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="healthyLivingApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Living</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+<section class="home" id="home">
+    <div class="content">
+        <h3>Discover Delicious and Nutritious Recipes for a Healthier You!</h3>
+        <a href="#about" class="btn">read more</a>
+    </div>
+</section>
+
+<section class="diet" id="diet">
+    <h1 class="heading">Diet Plan</h1>
+
+    <ul class="controls">
+        <li class="buttons" ng-click="filterCategory('Seafood')">
+            <img src="../image/monsal.jpg" alt="">
+            <h3>Seafood</h3>    
+        </li>
+        <li class="buttons" ng-click="filterCategory('Side')">
+            <img src="../image/french.jpg" alt="">
+            <h3>Side Dish</h3>    
+        </li>
+        <li class="buttons" ng-click="filterCategory('Vegan')">
+            <img src="../image/veganlag.jpg" alt="">
+            <h3>Vegan</h3>    
+        </li>
+        <li class="buttons" ng-click="filterCategory('Breakfast')">
+            <img src="../image/diet1.jpg" alt="">
+            <h3>Breakfast</h3>    
+        </li>
+    </ul>
+
+    <h1 class="heading" id="result">{{ resultMessage }}</h1>
+
+    <div class="image-container" id="filterResult">
+        <div ng-repeat="recipe in filteredRecipes">
+            <div class="box lunch">
+                <div class="image">
+                    <img ng-src="{{ recipe.strMealThumb }}" alt="{{ recipe.strMeal }}"/>
+                </div>
+                <div class="content">
+                    <a ng-href="ingredients.html?mealId={{ recipe.idMeal }}&description={{ recipe.description }}" target="_blank" class="link">{{ recipe.strMeal }}</a>
+                    <p>{{ recipe.description }}</p>
+                    <div class="icon">
+                        <a href="#"><i class="fas fa-clock"></i>22 September 2024</a>
+                        <a href="#"><i class="fas fa-clock"></i>by Amer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>

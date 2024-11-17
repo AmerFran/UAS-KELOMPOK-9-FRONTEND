@@ -8,6 +8,7 @@
     --bg: white;
     --light-black: #666;
     --text-color: var(--black); /* Menambahkan variabel untuk teks */
+    
 }
 
 * {
@@ -115,7 +116,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url(image/home.jpg) no-repeat center center;
+    background: url(../image/home.jpg) no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
 }
@@ -134,6 +135,10 @@ section {
 }
 
 /* About Section */
+    .about {
+        padding-top: 6rem; /* Tambah padding atas untuk menghindari tumpang tindih dengan navbar */
+    }
+
 .about .row {
     display: flex;
     flex-wrap: wrap;
@@ -536,3 +541,94 @@ section {
     font-size: 1.5rem; 
     margin-left: 0.5rem; 
 }
+
+/* .results {
+    padding: 6rem; 
+    text-align: center; 
+}
+
+.results .heading {
+    font-size: 4rem; 
+    color: var(--main-color); 
+    margin-bottom: 2rem;
+}
+
+.results p {
+    font-size: 2rem; 
+    color: var(--light-black);
+    margin-bottom: 3rem;
+}
+
+.success-stories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.success-stories .story {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.success-stories .story:hover {
+    transform: scale(1.05);
+}
+
+.success-stories .story h3 {
+    font-size: 2.5rem; 
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.success-stories .story p {
+    font-size: 1.8rem; 
+    color: var(--black);
+    line-height: 1.6;
+}
+
+
+.experience-input {
+    margin-top: 3rem;
+    text-align: left;
+    max-width: 600px;
+    margin: 3rem auto;
+    background-color: var(--white);
+    padding: 2rem; 
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.experience-input label {
+    font-size: 1.8rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.experience-input textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--light-gray);
+    resize: vertical;
+    margin-bottom: 1.5rem;
+}
+
+.experience-input button {
+    padding: 1rem 2rem;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.experience-input button:hover {
+    background-color: var(--dark-color); 
+} 
