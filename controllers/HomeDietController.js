@@ -1,47 +1,58 @@
-app.controller('HomeDietController', function($scope, $http) {
-    $scope.message = "Welcome to Home & Diet page";
-    $scope.filteredRecipes = [];
-    $scope.resultMessage = "Please select a diet category to view recipes.";
+var app = angular.module('healthyLivingApp', []);
 
-    // Function to filter recipes by category
+app.controller('MainController', function($scope, $http) {
+    //categories
+    $scope.categories = [
+        {name: 'Breakfast', image: '../image/diet1.jpg'},
+        {name: 'Vegan', image: '../image/veganlag.jpg'},
+        {name: 'Side', image: '../image/french.jpg'},
+        {name: 'Seafood', image: '../image/monsal.jpg'}
+    ];
+
+    $scope.filteredMeals = [];
+    $scope.filteredCategory = '';
+
+    //category filter
     $scope.filterCategory = function(category) {
-        $scope.resultMessage = category + " Recipes";
-        $scope.filteredRecipes = [];  // Reset filtered recipes
-        $scope.fetchRecipes(category);
-    };
+        $scope.filteredMeals = [];
+        $scope.filteredCategory = category;
+        var categoryQuery = { c: category };
 
-    // Function to fetch recipes based on selected category
-    $scope.fetchRecipes = function(category) {
-        var apiUrl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=' + category;
-        $http.get(apiUrl)
+        $http.get('https://www.themealdb.com/api/json/v1/1/filter.php?', {params: categoryQuery})
             .then(function(response) {
                 if (response.data.meals) {
-                    response.data.meals.forEach(function(meal) {
-                        $scope.getMealDetails(meal.idMeal);
+                    $scope.filteredMeals = response.data.meals.map(function(meal) {
+                        return {
+                            ...meal,
+                            description: `This delicious and tasty dish is perfect for ${category.toLowerCase()} lovers.`
+                        };
                     });
                 }
-            }, function(error) {
-                console.log('Error fetching meals', error);
+            }).catch(function(error) {
+                console.error("Error fetching meals:", error);
             });
     };
 
-    // Fetch detailed information for each meal
-    $scope.getMealDetails = function(mealId) {
-        var mealDetailsUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + mealId;
-        $http.get(mealDetailsUrl)
-            .then(function(response) {
-                var mealDetails = response.data.meals[0];
-                var area = mealDetails.strArea;
-                var category = mealDetails.strCategory;
-                var description = `This delicious and tasty ${area} dish is sure to satisfy you, perfect for ${category.toLowerCase()}.`;
-                $scope.filteredRecipes.push({
-                    idMeal: mealDetails.idMeal,
-                    strMeal: mealDetails.strMeal,
-                    strMealThumb: mealDetails.strMealThumb,
-                    description: description
+    //search by name
+    $scope.searchEvent = function() {
+        if ($scope.searchString) {
+            $scope.filteredMeals = [];
+            $scope.filteredCategory = `Search result for ${$scope.searchString}`;
+            var searchQuery = { s: $scope.searchString };
+
+            $http.get('https://www.themealdb.com/api/json/v1/1/search.php?', {params: searchQuery})
+                .then(function(response) {
+                    if (response.data.meals) {
+                        $scope.filteredMeals = response.data.meals.map(function(meal) {
+                            return {
+                                ...meal,
+                                description: `This delicious and tasty dish is perfect for all meal lovers.`
+                            };
+                        });
+                    }
+                }).catch(function(error) {
+                    console.error("Error fetching search results:", error);
                 });
-            }, function(error) {
-                console.log('Error fetching meal details', error);
-            });
+        }
     };
 });
