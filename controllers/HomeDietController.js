@@ -1,6 +1,4 @@
-var app = angular.module('healthyLivingApp', []);
-
-app.controller('MainController', function($scope, $http) {
+app.controller('HomeDietController', function($scope, $http) {
     //categories
     $scope.categories = [
         {name: 'Breakfast', image: '../image/diet1.jpg'},

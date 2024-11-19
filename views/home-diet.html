@@ -13,16 +13,14 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 
-<body ng-controller="MainController">
+<body>
     <header class="header">
         <a href="#" class="logo">Healthy Living</a>
         <div id="menu" ng-click="toggleMenu()">&#x1F354;</div> 
         <nav class="navbar">
-            <a href="#home">home</a>
-            <a href="#about">about</a>
-            <a href="#services">services</a>
-            <a href="#diet">diet</a>
-            <a href="#result">results</a>
+            <a href="#!home-diet">Home & Diet</a>
+            <a href="#!about-services">About & Services</a>
+            <a href="#!result">Results</a>
         </nav>
         <div class="search-container">
             <input type="text" id="searchString" ng-model="searchString">
@@ -40,11 +38,12 @@
     </section>
 
     <section class="diet" id="diet">
+        <div class="container-diet">
         <h1 class="heading">diet plan</h1>
         <ul class="controls">
             <li ng-repeat="category in categories" ng-click="filterCategory(category.name)">
                 <img ng-src="{{category.image}}" alt="">
-                <h3>{{category.name}}</h3>    
+                <h3 class="bomber">{{category.name}}</h3>    
             </li>
         </ul>
         <h1 class="heading" id="result">{{filteredCategory}}</h1>
@@ -64,6 +63,7 @@
             </div>
         </div>
     </section>
+</div>
 
     <div class="social-icons">
         <a href="https://github.com/AmerFran/KELOMPOK-9-FRONTEND"> 
