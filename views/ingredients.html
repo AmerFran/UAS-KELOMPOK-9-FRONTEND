@@ -1,38 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="mealApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meal Ingredients</title>
     <link rel="stylesheet" href="/css/style2.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body>
 
-    <div class="full-width-banner">
-        <h1 id="nameHeader"></h1>
+    <!-- Full-Width Banner -->
+    <div class="full-width-banner" ng-controller="IngredientController">
+        <h1 id="nameHeader">{{ meal.strMeal || 'Loading...' }}</h1>
     </div>
 
-    <div class="container">
+    <!-- Main Content -->
+    <div class="container" ng-controller="IngredientController">
+
+        <!-- Button to Jump to Recipe -->
         <div id="buttonContainer">
             <a href="#ingredientsContainer">Jump to Recipe</a>
         </div>
 
+        <!-- Description Section -->
         <div id="descriptionContainer">
-            <h2 id="descriptionHeader"></h2>
+            <h2 id="descriptionHeader">{{ description || 'Loading description...' }}</h2>
         </div>
 
+        <!-- Image Section -->
         <div id="imageContainer">
+            <img ng-src="{{ meal.strMealThumb }}" alt="Image of {{ meal.strMeal }}" />
         </div>
 
+        <!-- Ingredients Section -->
         <div id="ingredientsContainer">
+            <h2>Ingredients for {{ meal.strMeal || 'the recipe' }}:</h2>
+            <ul>
+                <li ng-repeat="ingredient in ingredients">{{ ingredient }}</li>
             </ul>
         </div>
 
-        <ol id="instructionContainer"><h2>Instruction For The Recipe</h2>
-        </ol>
+        <!-- Instruction Section -->
+        <div id="instructionContainer">
+            <h2>Instructions for the Recipe:</h2>
+            <ol>
+                <li ng-repeat="step in instructions">{{ step }}</li>
+            </ol>
+        </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="/js/ingredient.js"></script>
+    <script src="../controllers/IngredientController.js"></script>
 </body>
 </html>
