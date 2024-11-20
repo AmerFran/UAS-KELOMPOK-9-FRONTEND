@@ -382,7 +382,7 @@ section {
 
 .diet .image-container .box .content .icon a i{
     padding-right: .5rem;
-    coldieor: var(--main-color);
+    color: var(--main-color);
 }
 
 .container-diet {

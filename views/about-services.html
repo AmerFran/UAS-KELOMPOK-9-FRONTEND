@@ -1,100 +1,58 @@
-<header class="header">
-    <a href="#" class="logo">Healthy Living</a> 
-    <div id="menu" onclick="toggleMenu()">&#x1F354;</div> 
-    <nav class="navbar">
-        <a href="#!home-diet">Home & Diet</a>
-        <a href="#!about-services">About & Services</a>
-        <a href="#!results">Results</a>
-    </nav>
-    <div class="search-container">
-        <input type="text" id="searchString">
-        <button class="search-icon" aria-label="Search" id="searchButton">🔍</button>
-    </div>
-</header>
-
-<section class="about" id="about">
-    <h1 class="heading">about us</h1>
-    <div class="row">
-        <div class="content">
-            <h3>Our Goal is to provide you a recipes for healthy foods</h3>
-            <p>Join us on a journey to make healthy eating easy and enjoyable! Our platform offers a wide range of nutritious recipes to suit all tastes and dietary needs. Whether you're enhancing your wellness journey, experimenting with new ingredients, or cooking for your family, we've got you covered. Discover the joy of healthy cooking with us!</p>
+<!-- about-services.html -->
+<div ng-controller="AboutServicesController">
+    <header class="header">
+        <a href="#" class="logo">Healthy Living</a> 
+        <div id="menu" ng-click="toggleMenu()">&#x1F354;</div> 
+        <nav class="navbar">
+            <a href="#!home-diet">Home & Diet</a>
+            <a href="#!about-services">About & Services</a>
+            <a href="#!results">Results</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" id="searchString" ng-model="searchText">
+            <button class="search-icon" aria-label="Search" id="searchButton" ng-click="search()">🔍</button>
         </div>
-        <div class="image">
-            <img src="../image/about.png" alt="">
-        </div>
-    </div>
-</section>
+    </header>
 
-<section class="services" id="services">
-    <h1 class="heading">our services</h1>
-    <div class="box-container">
-        <div class="box">
-            <div class="icon">
-                <img src="../image/service-1.png" alt="">
-            </div>
+    <section class="about" id="about">
+        <h1 class="heading">{{aboutHeading}}</h1>
+        <div class="row">
             <div class="content">
-                <h3>Affordable Catering</h3>
-                <div class="line"></div>
-                <p>Enjoy delicious and healthy meals with our catering service at just $5 per meal.</p>
-                <ul>
-                    <li><i class="fas fa-check"></i>High-quality ingredients at an affordable price</li>
-                    <li><i class="fas fa-check"></i>Perfect for events, gatherings, and daily meals</li>
-                    <li><i class="fas fa-check"></i>Customizable options to suit your needs</li>
-                    <li><i class="fas fa-check"></i>Convenient and hassle-free service</li>
-                </ul>
+                <h3>{{aboutTitle}}</h3>
+                <p>{{aboutDescription}}</p>
+            </div>
+            <div class="image">
+                <img ng-src="{{aboutImage}}" alt="About Image">
             </div>
         </div>
+    </section>
 
-        <div class="box">
-            <div class="icon">
-                <img src="../image/service-2.png" alt="">
-            </div>
-            <div class="content">
-                <h3>Free Delivery</h3>
-                <div class="line"></div>
-                <p>Enjoy the convenience of having your meals delivered straight to your door at no extra cost.</p>
-                <ul>
-                    <li><i class="fas fa-check"></i>Fast and reliable delivery service</li>
-                    <li><i class="fas fa-check"></i>No additional charges for delivery</li>
-                    <li><i class="fas fa-check"></i>Available for all meal orders</li>
-                    <li><i class="fas fa-check"></i>Convenient scheduling options</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="icon">
-                <img src="../image/service-3.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>Variety of Food Choices</h3>
-                <div class="line"></div>
-                <p>Explore a wide range of food options to suit every taste and dietary preference.</p>
-                <ul>
-                    <li><i class="fas fa-check"></i>A diverse menu with global cuisines</li>
-                    <li><i class="fas fa-check"></i>Options for vegetarian, vegan, gluten-free, and more</li>
-                    <li><i class="fas fa-check"></i>Regularly updated menu to keep things exciting</li>
-                    <li><i class="fas fa-check"></i>Meals crafted by experienced chefs</li>
-                </ul>
+    <section class="services" id="services">
+        <h1 class="heading">{{servicesHeading}}</h1>
+        <div class="box-container">
+            <div class="box" ng-repeat="service in services">
+                <div class="icon">
+                    <img ng-src="{{service.image}}" alt="{{service.title}}">
+                </div>
+                <div class="content">
+                    <h3>{{service.title}}</h3>
+                    <div class="line"></div>
+                    <p>{{service.description}}</p>
+                    <ul>
+                        <li ng-repeat="feature in service.features">
+                            <i class="fas fa-check"></i>{{feature}}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="social-icons">
-        <a href="https://github.com/AmerFran/KELOMPOK-9-FRONTEND"> 
-            <i class="bx bxl-github"></i>
-        </a>
-        <a href="https://www.instagram.com/fabliusm/"> 
-            <i class="bx bxl-instagram-alt"></i>
-        </a>
-        <a href="https://x.com/"> 
-            <i class="bx bxl-twitter"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/amer-f-337088308/"> 
-            <i class="bx bxl-linkedin-square"></i>
-        </a>
-    </div>
-    
-    <p class="copyright">© Healthy Living | All Rights Reserved</p>
-    
-</section>
+        
+        <div class="social-icons">
+            <a ng-href="{{social.github}}" ng-repeat="social in socialLinks"> 
+                <i class="bx" ng-class="social.icon"></i>
+            </a>
+        </div>
+        
+        <p class="copyright">{{copyright}}</p>
+    </section>
+</div>
