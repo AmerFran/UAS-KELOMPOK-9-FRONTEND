@@ -4,13 +4,13 @@ app.controller('AboutServicesController', function($scope) {
     $scope.aboutHeading = "about us";
     $scope.aboutTitle = "Our Goal is to provide you a recipes for healthy foods";
     $scope.aboutDescription = "Join us on a journey to make healthy eating easy and enjoyable! Our platform offers a wide range of nutritious recipes to suit all tastes and dietary needs. Whether you're enhancing your wellness journey, experimenting with new ingredients, or cooking for your family, we've got you covered. Discover the joy of healthy cooking with us!";
-    $scope.aboutImage = "../image/about.png";
+    $scope.aboutImage = "../assets/image/about.png";
 
     // Services section data
     $scope.servicesHeading = "our services";
     $scope.services = [
         {
-            image: "../image/service-1.png",
+            image: "../assets/image/service-1.png",
             title: "Affordable Catering",
             description: "Enjoy delicious and healthy meals with our catering service at just $5 per meal.",
             features: [
@@ -21,7 +21,7 @@ app.controller('AboutServicesController', function($scope) {
             ]
         },
         {
-            image: "../image/service-2.png",
+            image: "../assets/image/service-2.png",
             title: "Free Delivery",
             description: "Enjoy the convenience of having your meals delivered straight to your door at no extra cost.",
             features: [
@@ -32,7 +32,7 @@ app.controller('AboutServicesController', function($scope) {
             ]
         },
         {
-            image: "../image/service-3.jpg",
+            image: "../assets/image/service-3.jpg",
             title: "Variety of Food Choices",
             description: "Explore a wide range of food options to suit every taste and dietary preference.",
             features: [
