@@ -317,7 +317,7 @@ section {
 .bmi-calculator {
     padding: 3rem;
     text-align: center;
-    background-color: #f0f8ff; /* Light blue background */
+    background-color: white;
     margin-top: 2rem;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -335,7 +335,7 @@ section {
     max-width: 600px;
     margin: 0 auto;
     padding: 1.5rem;
-    background-color: #ffffff; /* White background for the form */
+    background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
