@@ -1,16 +1,7 @@
-
-
-
-
-<!DOCTYPE html>
-<html lang="en" ng-app="healthyLivingApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthy Foods</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
@@ -50,10 +41,10 @@
         <div class="image-container" id="filterResult">
             <div class="box" ng-repeat="meal in filteredMeals">
                 <div class="image">
-                    <img ng-src="{{meal.strMealThumb}}" alt="">
+                    <img ng-src="{{meal.imagelink}}" alt="">
                 </div>
                 <div class="content">
-                    <a href="ingredients.html?mealId={{meal.idMeal}}&description={{meal.description}}" target="_blank" class="link">{{meal.strMeal}}</a>
+                    <a href="#!ingredient?mealId={{meal.id}}&description={{meal.description}}" target="_blank" class="link">{{meal.name}}</a>
                     <p>{{meal.description}}</p>
                     <div class="icon">
                         <a href="#"><i class="fas fa-clock"></i>22 September 2024</a>
@@ -86,8 +77,4 @@
     <p class="copyright">
         © Healthy Living | All Rights Reserved
     </p>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="../controllers/HomeDietController.js"></script>
 </body>
-</html>

@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +7,7 @@
 <body>
 
     <div class="full-width-banner">
-        <h1 id="nameHeader"></h1>
+        <h1>{{meal.name}}</h1>
     </div>
 
     <div class="container">
@@ -18,21 +16,29 @@
         </div>
 
         <div id="descriptionContainer">
-            <h2 id="descriptionHeader"></h2>
+            <h2>{{description}}</h2>
         </div>
 
         <div id="imageContainer">
+            <img ng-src="{{meal.imagelink}}" alt="Meal Image" />
         </div>
 
         <div id="ingredientsContainer">
+            <h2>Ingredients for {{meal.name}}:</h2>
+            <ul>
+                <li ng-repeat="ingredient in meal.ingredients">
+                    {{meal.measurements[$index]}} {{ingredient}}
+                </li>
             </ul>
         </div>
 
-        <ol id="instructionContainer"><h2>Instruction For The Recipe</h2>
-        </ol>
+        <div id="instructionContainer">
+            <h2>Instruction For The Recipe</h2>
+            <ol>
+                <li ng-repeat="instruction in meal.instructions">
+                    {{$index + 1}}. {{instruction}}
+                </li>
+            </ol>
+        </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="/js/ingredient.js"></script>
 </body>
-</html>
