@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="mealApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +7,8 @@
 </head>
 <body>
 
-    <!-- Full-Width Banner -->
-    <div class="full-width-banner" ng-controller="IngredientController">
-        <h1 id="nameHeader">{{ meal.strMeal || 'Loading...' }}</h1>
+    <div class="full-width-banner">
+        <h1>{{meal.name}}</h1>
     </div>
 
     <!-- Main Content -->
@@ -24,31 +21,31 @@
 
         <!-- Description Section -->
         <div id="descriptionContainer">
-            <h2 id="descriptionHeader">{{ description || 'Loading description...' }}</h2>
+            <h2>{{description}}</h2>
         </div>
 
         <!-- Image Section -->
         <div id="imageContainer">
-            <img ng-src="{{ meal.strMealThumb }}" alt="Image of {{ meal.strMeal }}" />
+            <img ng-src="{{meal.imagelink}}" alt="Meal Image" />
         </div>
 
         <!-- Ingredients Section -->
         <div id="ingredientsContainer">
-            <h2>Ingredients for {{ meal.strMeal || 'the recipe' }}:</h2>
+            <h2>Ingredients for {{meal.name}}:</h2>
             <ul>
-                <li ng-repeat="ingredient in ingredients">{{ ingredient }}</li>
+                <li ng-repeat="ingredient in meal.ingredients">
+                    {{meal.measurements[$index]}} {{ingredient}}
+                </li>
             </ul>
         </div>
 
-        <!-- Instruction Section -->
         <div id="instructionContainer">
-            <h2>Instructions for the Recipe:</h2>
+            <h2>Instruction For The Recipe</h2>
             <ol>
-                <li ng-repeat="step in instructions">{{ step }}</li>
+                <li ng-repeat="instruction in meal.instructions">
+                    {{$index + 1}}. {{instruction}}
+                </li>
             </ol>
         </div>
     </div>
-
-    <script src="../controllers/IngredientController.js"></script>
 </body>
-</html>

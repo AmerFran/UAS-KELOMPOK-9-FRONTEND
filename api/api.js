@@ -2,10 +2,12 @@ import express from 'express';
 import pool from '../database.js';
 import bcrypt from 'bcryptjs';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
 app.use(bodyParser.json());
+app.use(cors());
 
 //hashing
 const hashPassword = async (password) => {
@@ -119,8 +121,25 @@ app.delete('/users/:id', async (req, res) => {
 //food endpoints--------------------------------------------
 //get all foods
 app.get('/foods', async (req, res) => {
+    const category=req.query.c;
+    const name=req.query.n;
+    let query='SELECT id, name, category, area, imagelink, instructions, ingredients, measurements, price FROM food';
+    let params=[];
+
+    //queries
+    if (category && name) {
+        query+=' WHERE category=$1 AND name ILIKE $2';
+        params.push(category, `%${name}%`);
+    } else if (category) {
+        query+=' WHERE category = $1';
+        params.push(category);
+    } else if (name) {
+        query+=' WHERE name ILIKE $1';
+        params.push(`%${name}%`);
+    }
+
     try {
-        const result = await pool.query('SELECT id, name, imagelink, category, price FROM food');
+        const result = await pool.query(query, params);
         res.status(200).json(result.rows);
     } catch (error) {
         console.error(error);
@@ -132,7 +151,7 @@ app.get('/foods', async (req, res) => {
 app.get('/foods/:id', async (req, res) => {
     const foodId = parseInt(req.params.id, 10);
     try {
-        const result = await pool.query('SELECT id, name, imagelink, category, price FROM food WHERE id = $1', [foodId]);
+        const result = await pool.query('SELECT id,name,category,area,imagelink,instructions,ingredients,measurements,price FROM food WHERE id = $1', [foodId]);
         if (result.rows.length === 0) {
             return res.status(404).json({ error: 'Food not found' });
         }
@@ -145,16 +164,16 @@ app.get('/foods/:id', async (req, res) => {
 
 //create new food
 app.post('/foods', async (req, res) => {
-    const { name, imagelink, category, price } = req.body;
+    const { name, imagelink, category, price,ingredients,measurements,area,instructions} = req.body;
 
     if (!name || !price) {
-        return res.status(400).json({ error: 'Missing required fields' });
+        return res.status(400).json({ error: 'Name and price cannot be empty' });
     }
 
     try {
         const result = await pool.query(
-            'INSERT INTO food (name, imagelink, category, price) VALUES ($1, $2, $3, $4) RETURNING id, name, imagelink, category, price',
-            [name, imagelink, category, price]
+            'INSERT INTO food (name, imagelink, category, price,ingredients,measurements,area,instructions) VALUES ($1, $2, $3, $4,$5,$6,$7,$8) RETURNING id, name, imagelink, category, price',
+            [name, imagelink, category, price,ingredients,measurements,area,instructions]
         );
 
         res.status(201).json(result.rows[0]);

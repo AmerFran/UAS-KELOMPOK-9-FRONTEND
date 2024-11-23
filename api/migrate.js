@@ -16,8 +16,12 @@ const createTables = async () => {
             CREATE TABLE IF NOT EXISTS food (
             id SERIAL PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
-            imagelink TEXT,
             category VARCHAR(50),
+            area VARCHAR(50),
+            imagelink TEXT,
+            instructions TEXT,
+            ingredients TEXT[],
+            measurements TEXT[],
             price DECIMAL(10, 2) NOT NULL
             );
         `);
