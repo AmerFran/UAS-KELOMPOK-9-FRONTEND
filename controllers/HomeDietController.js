@@ -1,10 +1,10 @@
 app.controller('HomeDietController', function($scope, $http) {
     //categories
     $scope.categories = [
-        {name: 'Breakfast', image: '../image/diet1.jpg'},
-        {name: 'Vegan', image: '../image/veganlag.jpg'},
-        {name: 'Side', image: '../image/french.jpg'},
-        {name: 'Seafood', image: '../image/monsal.jpg'}
+        {name: 'Breakfast', image: '../assets/image/diet1.jpg'},
+        {name: 'Vegan', image: '../assets/image/veganlag.jpg'},
+        {name: 'Side', image: '../assets/image/french.jpg'},
+        {name: 'Seafood', image: '../assets/image/monsal.jpg'}
     ];
 
     $scope.filteredMeals = [];

@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 :root {
     --main-color: green;
     --primary: white;
@@ -116,7 +116,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url(../image/home.jpg) no-repeat center center;
+    background: url(../assets/image/home.jpg) no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
 }
@@ -134,10 +134,50 @@ section {
     padding-bottom: 3.5rem;
 }
 
+/* Parallax Video For About */ */
+.parallax-video {
+    position: relative;
+    height: 100vh; 
+    overflow: hidden;
+    background-color: black; 
+}
+
+#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.parallax-video .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white);
+    text-align: center;
+    z-index: 1;
+}
+
+.parallax-video .content h2 {
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 8rem;
+    margin-bottom: 2rem;
+    color: lightgreen;
+}
+
 /* About Section */
-    .about {
-        padding-top: 6rem; /* Tambah padding atas untuk menghindari tumpang tindih dengan navbar */
-    }
+.about {
+    padding-top: 80rem; 
+}
+
+.about .heading{
+    margin-top: 40rem;
+}
 
 .about .row {
     display: flex;
@@ -382,7 +422,7 @@ section {
 
 .diet .image-container .box .content .icon a i{
     padding-right: .5rem;
-    coldieor: var(--main-color);
+    color: var(--main-color);
 }
 
 .container-diet {
@@ -554,21 +594,21 @@ section {
     margin-left: 0.5rem; 
 }
 
-/* .results {
-    padding: 6rem; 
-    text-align: center; 
+.results {
+    padding: 6rem;
+    text-align: center;
 }
 
 .results .heading {
-    font-size: 4rem; 
-    color: var(--main-color); 
+    font-size: 4rem;
+    color: var(--main-color);
     margin-bottom: 2rem;
 }
 
 .results p {
-    font-size: 2rem; 
+    font-size: 2rem;
     color: var(--light-black);
-    margin-bottom: 3rem;
+    margin-bottom: 6rem;
 }
 
 .success-stories {
@@ -590,17 +630,16 @@ section {
 }
 
 .success-stories .story h3 {
-    font-size: 2.5rem; 
+    font-size: 2.5rem;
     color: var(--main-color);
     margin-bottom: 1rem;
 }
 
 .success-stories .story p {
-    font-size: 1.8rem; 
+    font-size: 1.8rem;
     color: var(--black);
     line-height: 1.6;
 }
-
 
 .experience-input {
     margin-top: 3rem;
@@ -608,9 +647,10 @@ section {
     max-width: 600px;
     margin: 3rem auto;
     background-color: var(--white);
-    padding: 2rem; 
+    padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .experience-input label {
@@ -641,11 +681,10 @@ section {
     transition: background-color 0.3s ease;
 }
 
-.experience-input button:hover {
-    background-color: var(--dark-color); 
-} 
-
-*/
+.experience-input:hover {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
 
 .bomber{
     font-size: 25px;

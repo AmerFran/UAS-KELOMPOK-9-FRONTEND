@@ -3,6 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meal Ingredients</title>
     <link rel="stylesheet" href="/css/style2.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body>
 
@@ -10,19 +11,25 @@
         <h1>{{meal.name}}</h1>
     </div>
 
-    <div class="container">
+    <!-- Main Content -->
+    <div class="container" ng-controller="IngredientController">
+
+        <!-- Button to Jump to Recipe -->
         <div id="buttonContainer">
             <a href="#ingredientsContainer">Jump to Recipe</a>
         </div>
 
+        <!-- Description Section -->
         <div id="descriptionContainer">
             <h2>{{description}}</h2>
         </div>
 
+        <!-- Image Section -->
         <div id="imageContainer">
             <img ng-src="{{meal.imagelink}}" alt="Meal Image" />
         </div>
 
+        <!-- Ingredients Section -->
         <div id="ingredientsContainer">
             <h2>Ingredients for {{meal.name}}:</h2>
             <ul>
