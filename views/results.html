@@ -19,6 +19,15 @@
         <div class="story" ng-repeat="story in stories">
             <h3>{{ story.title }}</h3>
             <p>{{ story.description }}</p>
+            <button ng-click="showDetails(story)">Read More</button>
+        </div>
+    </div>
+<!--add modal-->
+    <div class="modal" ng-show="isModalVisible">
+        <div class="modal-content">
+            <span class="close" ng-click="closeModal()">&times;</span>
+            <h2>{{ selectedStory.title }}</h2>
+            <p>{{ selectedStory.fullDescription }}</p>
         </div>
     </div>
 
