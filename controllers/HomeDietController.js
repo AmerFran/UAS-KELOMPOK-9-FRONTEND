@@ -34,16 +34,12 @@ app.controller('HomeDietController', function($scope, $http) {
             });
     };
 
-    // search by name
+    //name search
     $scope.searchEvent = function() {
         if ($scope.searchString) {
             $scope.filteredMeals = [];
             $scope.filteredCategory = `Search result for ${$scope.searchString}`;
-
-            // Prepare the query parameters for searching by name
             var searchQuery = { n: $scope.searchString };
-
-            // Make API call to your foods API to search by name
             $http.get('http://localhost:3000/foods', {params: searchQuery})
                 .then(function(response) {
                     if (response.data) {

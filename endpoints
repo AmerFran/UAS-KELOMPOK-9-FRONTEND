@@ -3,6 +3,10 @@ get:
 /users/[id] (find by id)
 
 /foods (all foods)
+supported queries: 
+-c=[category] for filtering categories (case sensitive) 
+-n=[name] for searching names
+
 /foods/[id] (find by id)
 
 /carts (all carts)
