@@ -44,6 +44,38 @@ app.controller('AboutServicesController', function($scope) {
         }
     ];
 
+    //bmi section
+    $scope.bmiData = {
+        height: null,
+        weight: null,
+    };
+
+    $scope.bmiResult = null;
+    $scope.bmiCategory = "";
+
+    $scope.calculateBMI = function () {
+        if ($scope.bmiData.height && $scope.bmiData.weight) {
+            const heightInMeters = $scope.bmiData.height / 100;
+            $scope.bmiResult = (
+                $scope.bmiData.weight / (heightInMeters * heightInMeters)
+            ).toFixed(2);
+
+            // Tentukan kategori BMI
+            if ($scope.bmiResult < 18.5) {
+                $scope.bmiCategory = "Underweight";
+            } else if ($scope.bmiResult < 24.9) {
+                $scope.bmiCategory = "Normal weight";
+            } else if ($scope.bmiResult < 29.9) {
+                $scope.bmiCategory = "Overweight";
+            } else {
+                $scope.bmiCategory = "Obesity";
+            }
+        } else {
+            $scope.bmiResult = null;
+            $scope.bmiCategory = "";
+        }
+    };
+
     // Social media links
     $scope.socialLinks = [
         {
