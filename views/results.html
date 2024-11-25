@@ -12,19 +12,36 @@
             <button class="search-icon" aria-label="Search" id="searchButton" ng-click="search()">🔍</button>
         </div>
     </header>
-<section class="results" id="results" ng-controller="ResultsController">
-    <h1 class="heading">{{ message }}</h1>
-    <p>Read about our clients' journeys to better health and wellness:</p>
-    <div class="success-stories">
-        <div class="story" ng-repeat="story in stories">
-            <h3>{{ story.title }}</h3>
-            <p>{{ story.description }}</p>
-        </div>
-    </div>
 
-    <div class="experience-input">
-        <label for="user-experience">Share Your Experience:</label>
-        <textarea id="user-experience" placeholder="Tell us about your journey..." rows="5" ng-model="userExperience"></textarea>
-        <button type="button" ng-click="submitExperience()">Submit</button>
-    </div>
-</section>
+    <section class="results" id="results" ng-controller="ResultsController">
+        <h1 class="heading">{{ message }}</h1>
+        <p>Read about our clients' journeys to better health and wellness:</p>
+        
+        <!-- Success Stories -->
+        <div class="success-stories">
+            <div class="story" ng-repeat="story in stories">
+                <h3>{{ story.title }}</h3>
+                <p>{{ story.message }}</p> 
+            </div>
+        </div>
+
+        <!-- User Input Section for Experience -->
+        <div class="experience-input" ng-show="!hasUserStory">
+            <h2>Share Your Experience:</h2>
+            <textarea id="user-experience" placeholder="Tell us about your journey..." rows="5" ng-model="userExperience" maxlength="500"></textarea>
+            <div class="character-counter">{{ 500 - (userExperience.length || 0) }} characters remaining</div>
+            <button type="button" ng-click="submitExperience()" ng-disabled="userExperience.length > 500">Submit</button>
+        </div>
+
+        <!-- Edit Section -->
+        <div class="experience-input" ng-show="hasUserStory">
+            <h2>Edit Your Experience:</h2>
+            <textarea id="edit-experience" placeholder="Update your message..." rows="5" ng-model="editedMessage" maxlength="500">{{ editedMessage }}</textarea>
+            <div class="character-counter">{{ 500 - (editedMessage.length || 0) }} characters remaining</div>
+            <button type="button" ng-click="updateExperience()" ng-disabled="editedMessage.length > 500">Update</button>
+        </div>
+
+        <button ng-click="deleteStory(user.id)">Delete</button>
+
+    </section>
+</div>
