@@ -14,12 +14,12 @@
         <br>
         <br>
         <h3>Welcome, {{ user.username }}!</h3>
-        <form ng-submit="change(user)">
+        <form ng-submit="change(user)" name="validator0" novalidate>
             <h3>change email and username</h3>
-            <input type="text" ng-model="change.username" placeholder="Username" >
-            <input type="email" ng-model="change.email" placeholder="Email">
-            <input type="password" ng-model="change.password" placeholder="Password">
-            <button type="submit">change</button>
+            <input type="text" ng-model="change.username" placeholder="Username" required>
+            <input type="email" ng-model="change.email" placeholder="Email" required>
+            <input type="password" ng-model="change.password" placeholder="Password" required>
+            <button type="submit" ng-disabled="validator0.$invalid">change</button>
         </form>
         <br>
         <br>
@@ -27,14 +27,19 @@
         <br>
         <br>
         <br>
-        <form ng-submit="changePass()">
+        <form ng-submit="changePass(user)" name="validator1" novalidate>
             <h3>change password</h3>
-            <input type="password" ng-model="change.currPass" placeholder="current password">
-            <input type="password" ng-model="change.newPass" placeholder="new password">
-            <input type="password" ng-model="change.confirmPass" placeholder="confirm password">
-            <button type="submit">change</button>
+            <input type="password" ng-model="change.currPass" placeholder="current password" required>
+            <input type="password" ng-model="change.newPass" placeholder="new password" required>
+            <input type="password" ng-model="change.confirmPass" placeholder="confirm password" required>
+            <button type="submit" ng-disabled="validator1.$invalid">change</button>
         </form>
-        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <h1 ng-click="logOut()">logout</h1>
 
         

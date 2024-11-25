@@ -43,7 +43,7 @@ app.config(function($routeProvider) {
         })
         .when('/ingredient', {
             templateUrl: '/views/ingredients.html',
-            controller: 'IngredientController',
+            controller: 'IngredientsController',
             resolve: {
                 auth: function(AuthService, $location) {
                     if (!AuthService.isAuthenticated()) {
@@ -55,6 +55,39 @@ app.config(function($routeProvider) {
         .when('/profile', {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
+            resolve: {
+                auth: function(AuthService, $location) {
+                    if (!AuthService.isAuthenticated()) {
+                        $location.path('/');
+                    }
+                }
+            }
+        })
+        .when('/shop', {
+            templateUrl: '/views/shop.html',
+            controller: 'ShopController',
+            resolve: {
+                auth: function(AuthService, $location) {
+                    if (!AuthService.isAuthenticated()) {
+                        $location.path('/');
+                    }
+                }
+            }
+        })
+        .when('/payment', {
+            templateUrl: '/views/payment.html',
+            controller: 'PaymentController',
+            resolve: {
+                auth: function(AuthService, $location) {
+                    if (!AuthService.isAuthenticated()) {
+                        $location.path('/');
+                    }
+                }
+            }
+        })
+        .when('/transactions', {
+            templateUrl: '/views/trnsactions.html',
+            controller: 'TransactionsController',
             resolve: {
                 auth: function(AuthService, $location) {
                     if (!AuthService.isAuthenticated()) {

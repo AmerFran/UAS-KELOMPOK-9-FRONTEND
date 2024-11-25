@@ -1,0 +1,18 @@
+<body ng-controller="PaymentController">
+    <div>
+        <h2>Credit Card Payment</h2>
+        <h2>total price: {{result.total_price}}</h2>
+        <form ng-submit="processPayment()" name="paymentForm" novalidate>
+            <div>
+                <label for="cardNumber">Card Number:</label>
+                <input type="text" id="cardNumber" ng-model="payment.cardNumber" required />
+                <button type="submit" ng-disabled="paymentForm.$invalid">pay</button>
+            </div>
+            
+        </form>
+    </div>
+
+    
+
+</body>
+</html>
