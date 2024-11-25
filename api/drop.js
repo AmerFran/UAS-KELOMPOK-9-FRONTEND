@@ -6,6 +6,8 @@ const dropTables=async()=>{
         await pool.query('DROP TABLE IF EXISTS cart;');
         await pool.query('DROP TABLE IF EXISTS users;');
         await pool.query('DROP TABLE IF EXISTS food;');
+        await pool.query('DROP TABLE IF EXISTS transactions;');
+        await pool.query('DROP TABLE IF EXISTS messages;');
         
         console.log('Finished deleting tables');
     }catch(error){

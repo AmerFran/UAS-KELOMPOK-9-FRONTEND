@@ -1,0 +1,54 @@
+<style>
+    /*placeholder for smaller image*/
+    .food-image {
+        width: 100px;
+        height: auto;
+    }
+</style>
+<body ng-controller="ShopController">
+
+    <h1>Food Shop</h1>
+
+    <h3>Available Food Items</h3>
+    <!--food display-->
+    <div ng-repeat="food in foodItems">
+        <div>
+            <img ng-src="{{ food.imagelink }}" alt="{{ food.name }}" class="food-image">
+            <div>
+                <strong>{{ food.name }}</strong> - ${{ food.price }}
+                <br>
+                <label for="quantity{{ food.id }}">Quantity: </label>
+                <input type="number" id="quantity{{ food.id }}" ng-model="food.quantity" min="1" value="1">
+                <button ng-click="addToCart(food, food.quantity)">Add to Cart</button>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <h3>Your Cart</h3>
+    <div ng-repeat="cartItem in cart">
+        <p>
+            {{ cartItem.food.name }} (x{{ cartItem.quantity }}) - ${{ (cartItem.food.price * cartItem.quantity).toFixed(2) }}
+            <!-- Add a minus button to decrease the quantity of the item -->
+            <button ng-click="decreaseQuantity(cartItem)">-</button>
+        </p>
+    </div>
+
+    <div>
+        <strong>Total Price: ${{ calculateTotal() }}</strong>
+    </div>
+
+    <button ng-click="submitCart(user.id)">Submit Cart</button>
+
+    <div class="pagination">
+        <!-- Previous Page Button -->
+        <button ng-click="prevPage()" ng-disabled="page === 1">Previous</button>
+
+        <!-- Page Info -->
+        <span>Page {{ page }} of {{ totalPages }}</span>
+
+        <!-- Next Page Button -->
+        <button ng-click="nextPage()" ng-disabled="page === totalPages">Next</button>
+    </div>
+</body>
+</html>

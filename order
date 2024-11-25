@@ -1,0 +1,7 @@
+order in which npm commands should be run
+
+npm run drop (make sure theres no conflicting tables)
+npm run migrate
+npm run fakegen
+npm run converter
+npm start

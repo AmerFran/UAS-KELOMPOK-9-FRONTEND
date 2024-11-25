@@ -1,15 +1,12 @@
 app.controller('ProfileController', ['$scope', '$http', '$window', '$location','AuthService', function ($scope, $http, $window, $location,AuthService) {
     const API_URL = 'http://localhost:3000';
     
-    $scope.isAuthenticated = function () {
-        return (AuthService.isAuthenticated());
-    };
-
+    //gets user information(name,email,id,etc)
     $scope.getUser=function(){
         return(AuthService.getUser());
     }
 
-    //handles the change of username and or email
+    //handles username and email change
     $scope.change = function (currUser) {
         const data={
             username:$scope.change.username,
@@ -28,11 +25,31 @@ app.controller('ProfileController', ['$scope', '$http', '$window', '$location','
                 alert("incorrect password");
             });
     };
-    
 
+    //handles password change
+    $scope.changePass = function (currUser) {
+        if($scope.change.newPass!=$scope.change.confirmPass){
+            alert("new password and confirm password dont match")
+        }else{
+            const data={
+                newpass:String($scope.change.newPass),
+                oldpass:String($scope.change.currPass)
+            }
+            
     
-
-    //get current user
+            //checks if credentials are correct
+            $http.put(API_URL + `/users/changepass/${currUser.id}`, data)
+                .then(function (response) {
+                    alert("sucessfully changed");
+    
+                })
+                .catch(function (error) {
+                    alert("incorrect password");
+                });
+        }
+    };
+    
+    //passes variable to html
     $scope.user = $scope.getUser();
 
     //logs the user out and redirects them to the login page

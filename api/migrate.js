@@ -28,12 +28,32 @@ const createTables = async () => {
 
         await pool.query(`
             CREATE TABLE IF NOT EXISTS cart (
-            id SERIAL PRIMARY KEY,
-            user_id INT REFERENCES users(id) ON DELETE CASCADE,
-            items INT[],
-            total_price DECIMAL(10, 2)
+                id SERIAL PRIMARY KEY,
+                user_id INT REFERENCES users(id) ON DELETE CASCADE,
+                items JSONB,
+                total_price DECIMAL(10, 2)
             );
         `);
+
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS transactions (
+                id SERIAL PRIMARY KEY,
+                cart_id INT REFERENCES cart(id) ON DELETE CASCADE,
+                user_id INT REFERENCES users(id) ON DELETE CASCADE,
+                pickup_date DATE,
+                checkout_date DATE,
+                picked_up BOOLEAN DEFAULT FALSE
+            );
+        `);
+
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS messages (
+                id SERIAL PRIMARY KEY,
+                user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+                message TEXT
+            );
+        `);
+
 
         console.log('Finished migrating tables');
     } catch (error) {
