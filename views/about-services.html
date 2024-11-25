@@ -54,6 +54,27 @@
                 </div>
             </div>
         </div>
+
+        <section class="bmi-calculator" id="bmi-calculator">
+            <h1 class="heading">BMI Calculator</h1>
+            <div class="calculator-container">
+                <form ng-submit="calculateBMI()">
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" ng-model="bmiData.height" required>
+                    
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" ng-model="bmiData.weight" required>
+                    
+                    <button type="submit" class="calculate-btn">Calculate</button>
+                </form>
+                <div class="result" ng-if="bmiResult">
+                    <h3>Your BMI: {{bmiResult}}</h3>
+                    <p>{{bmiCategory}}</p>
+                </div>
+            </div>
+        </section>
+
+
         
         <div class="social-icons">
             <a ng-href="{{social.github}}" ng-repeat="social in socialLinks"> 
