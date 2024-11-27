@@ -6,11 +6,25 @@
     }
 </style>
 <body ng-controller="FoodController">
-
     <div>
         <h2>My Foods</h2>
         <a href="#!/createFood">createFood</a>
-        
+
+        <!-- Search and filter form -->
+        <div>
+            <input type="text" ng-model="searchName" placeholder="Search by name">
+            <select ng-model="selectedCategory">
+                <option value="">none</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Side">Side</option>
+                <option value="Seafood">Seafood</option>
+            </select>
+            <!-- Submit button to trigger search -->
+            <button ng-click="searchFoods()">Search</button>
+        </div>
+
+        <!-- Food items list -->
         <div ng-repeat="food in foods">
             <div>
                 <h3>{{ food.name }}</h3>
@@ -21,8 +35,13 @@
                 <button ng-click="deleteFood(food.id)">Delete</button>
             </div>
         </div>
-        
-        
+
+        <!-- Pagination Controls -->
+        <div>
+            <button ng-disabled="currentPage <= 1" ng-click="changePage(currentPage - 1)">Previous</button>
+            <span>Page {{currentPage}} of {{totalPages}}</span>
+            <button ng-disabled="currentPage >= totalPages" ng-click="changePage(currentPage + 1)">Next</button>
+        </div>
     </div>
 </body>
-</html>
+

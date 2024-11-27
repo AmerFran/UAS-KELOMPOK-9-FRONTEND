@@ -22,7 +22,11 @@ app.controller('ProfileController', ['$scope', '$http', '$window', '$location','
 
             })
             .catch(function (error) {
-                alert("incorrect password");
+                if (error.data && error.data.error) {
+                    alert(error.data.error); // Display the raw error message returned from the API
+                } else {
+                    alert("An unexpected error occurred. Please try again later.");
+                }
             });
     };
 
@@ -56,6 +60,22 @@ app.controller('ProfileController', ['$scope', '$http', '$window', '$location','
     $scope.logOut = function() {
         AuthService.logout();
         $location.path('/');
+    };
+
+    //delete
+    $scope.deleteAccount = function(currUser) {
+        const confirmation = confirm("Are you sure you want to delete your account? This action cannot be undone.");
+        if (confirmation) {
+            $http.delete(API_URL + `/users/${currUser.id}`)
+                .then(function(response) {
+                    alert("Your account has been deleted successfully.");
+                    AuthService.logout();
+                    $location.path('/');
+                })
+                .catch(function(error) {
+                    alert("Error deleting account: " + (error.data && error.data.error ? error.data.error : "Please try again later."));
+                });
+        }
     };
 
 

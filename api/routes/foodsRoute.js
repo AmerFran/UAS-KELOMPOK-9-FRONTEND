@@ -3,16 +3,16 @@ import pool from '../../database.js';
 
 const router = express.Router();
 
-//get all foods
+//gets all foods with some optional parameters for filtering,searching and pagination
 router.get('/foods', async (req, res) => {
     const category = req.query.c;
     const name = req.query.n;
     const page = parseInt(req.query.page);  // Optional page
     const limit = parseInt(req.query.limit);  // Optional limit
     
-    let query = 'SELECT id, user_id, name, category, area, imagelink, instructions, ingredients, measurements, price,creation_date FROM food';
+    let query = 'SELECT id, user_id, name, category, area, imagelink, instructions, ingredients, measurements, price, creation_date FROM food';
     let params = [];
-
+    
     // Build query conditions
     if (category && name) {
         query += ' WHERE category=$1 AND name ILIKE $2';
@@ -25,24 +25,21 @@ router.get('/foods', async (req, res) => {
         params.push(`%${name}%`);
     }
 
-    // Apply pagination if page and limit are provided
-    if (page && limit) {
-        const offset = (page - 1) * limit;  // Calculate the offset
-        query += ' LIMIT $' + (params.length + 1) + ' OFFSET $' + (params.length + 2);
-        params.push(limit, offset);
-    }
-
     try {
+        // First, execute the filtered query
         const result = await pool.query(query, params);
 
-        // Optional: Fetch total count of items for pagination info
+        // Optional: Fetch total count of items for pagination info, if pagination is required
         if (page && limit) {
-            const countResult = await pool.query('SELECT COUNT(*) FROM food');
-            const totalItems = parseInt(countResult.rows[0].count, 10);
+            const totalItems = result.rows.length;
             const totalPages = Math.ceil(totalItems / limit);
 
+            // Apply pagination to the results (after filtering)
+            const offset = (page - 1) * limit;
+            const paginatedData = result.rows.slice(offset, offset + limit);
+
             res.status(200).json({
-                data: result.rows,
+                data: paginatedData,
                 pagination: {
                     page,
                     limit,
@@ -51,6 +48,7 @@ router.get('/foods', async (req, res) => {
                 }
             });
         } else {
+            // If no pagination, just return the filtered results
             res.status(200).json(result.rows);
         }
 

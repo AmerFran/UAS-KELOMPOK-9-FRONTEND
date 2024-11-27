@@ -7,65 +7,75 @@ app.controller('HomeDietController', function($scope, $http) {
         {name: 'Seafood', image: '../assets/image/monsal.jpg'}
     ];
 
+    $scope.page = 1;  // Start on the first page
+    $scope.limit = 10; // Number of items per page
+    $scope.totalPages = 1; // Default total pages (to be updated later)
     $scope.filteredMeals = [];
     $scope.filteredCategory = '';
 
-    // Function to fetch the username based on the users id
+    // Function to fetch the username based on the user's ID
     function fetchUsername(userId) {
         return $http.get(`http://localhost:3000/users/${userId}`)
             .then(function(response) {
                 return response.data.username;
             }).catch(function(error) {
                 console.error("Error fetching user data:", error);
-                return "Unknown User";  //in case if the user row is somehow empty
+                return "Unknown User";  // Default if no user found
             });
     }
 
-    // Category filter
+    // Category filter with pagination
     $scope.filterCategory = function(category) {
         $scope.filteredMeals = [];
         $scope.filteredCategory = category;
 
-        // Prepare the query parameters
-        var categoryQuery = { c: category };
+        var categoryQuery = { 
+            c: category, 
+            page: $scope.page, 
+            limit: $scope.limit 
+        };
 
-        // Make API call to your foods API to filter by category
-        $http.get('http://localhost:3000/foods', {params: categoryQuery})
+        // Make API call to your foods API to filter by category with pagination
+        $http.get('http://localhost:3000/foods', { params: categoryQuery })
             .then(function(response) {
                 if (response.data) {
-                    $scope.filteredMeals = response.data.map(function(food) {
-                        // Fetch the username for each meal and add it to the food object
+                    $scope.filteredMeals = response.data.data.map(function(food) {
                         fetchUsername(food.user_id).then(function(username) {
                             food.username = username;
                         });
-                        // Add the description for the meal
                         food.description = `This delicious and tasty dish is perfect for ${category.toLowerCase()} lovers.`;
                         return food;
                     });
+                    $scope.totalPages = response.data.pagination.totalPages;
                 }
             }).catch(function(error) {
                 console.error("Error fetching meals by category:", error);
             });
     };
 
-    // Name search
+    // Name search with pagination
     $scope.searchEvent = function() {
         if ($scope.searchString) {
             $scope.filteredMeals = [];
             $scope.filteredCategory = `Search result for ${$scope.searchString}`;
-            var searchQuery = { n: $scope.searchString };
 
-            $http.get('http://localhost:3000/foods', {params: searchQuery})
+            var searchQuery = { 
+                n: $scope.searchString, 
+                page: $scope.page, 
+                limit: $scope.limit 
+            };
+
+            $http.get('http://localhost:3000/foods', { params: searchQuery })
                 .then(function(response) {
                     if (response.data) {
-                        $scope.filteredMeals = response.data.map(function(food) {
-                            // Fetch the username for each meal and add it to the food object
+                        $scope.filteredMeals = response.data.data.map(function(food) {
                             fetchUsername(food.user_id).then(function(username) {
                                 food.username = username;
                             });
                             food.description = `This delicious and tasty dish is perfect for all meal lovers.`;
                             return food;
                         });
+                        $scope.totalPages = response.data.pagination.totalPages;
                     }
                 }).catch(function(error) {
                     console.error("Error fetching search results:", error);
@@ -73,10 +83,27 @@ app.controller('HomeDietController', function($scope, $http) {
         }
     };
 
-    // Check for Enter key press to trigger the search
-    $scope.checkEnter = function(event) {
-        if (event.key === 'Enter') {
-            $scope.searchEvent();
+    // Go to the next page
+    $scope.nextPage = function() {
+        if ($scope.page < $scope.totalPages) {
+            $scope.page++;
+            if ($scope.filteredCategory) {
+                $scope.filterCategory($scope.filteredCategory);  // Re-fetch the filtered meals
+            } else {
+                $scope.searchEvent();  // Re-fetch search results
+            }
+        }
+    };
+
+    // Go to the previous page
+    $scope.previousPage = function() {
+        if ($scope.page > 1) {
+            $scope.page--;
+            if ($scope.filteredCategory) {
+                $scope.filterCategory($scope.filteredCategory);  // Re-fetch the filtered meals
+            } else {
+                $scope.searchEvent();  // Re-fetch search results
+            }
         }
     };
 });
