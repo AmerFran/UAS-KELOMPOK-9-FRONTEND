@@ -2,15 +2,7 @@
     <header class="header">
         <a href="#" class="logo">Healthy Living</a> 
         <div id="menu" ng-click="toggleMenu()">&#x1F354;</div> 
-        <nav class="navbar">
-            <a href="#!home-diet">Home & Diet</a>
-            <a href="#!about-services">About & Services</a>
-            <a href="#!results">Results</a>
-        </nav>
-        <div class="search-container">
-            <input type="text" id="searchString" ng-model="searchText">
-            <button class="search-icon" aria-label="Search" id="searchButton" ng-click="search()">🔍</button>
-        </div>
+        <div ng-include="'navbar.html'"></div>
     </header>
 
     <section class="parallax-video">

@@ -15,6 +15,7 @@ const createTables = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS food (
             id SERIAL PRIMARY KEY,
+            user_id INT REFERENCES users(id) ON DELETE CASCADE,
             name VARCHAR(100) NOT NULL,
             category VARCHAR(50),
             area VARCHAR(50),
@@ -22,7 +23,8 @@ const createTables = async () => {
             instructions TEXT,
             ingredients TEXT[],
             measurements TEXT[],
-            price DECIMAL(10, 2) NOT NULL
+            price DECIMAL(10, 2) NOT NULL,
+            creation_date TIMESTAMPTZ
             );
         `);
 
@@ -38,10 +40,11 @@ const createTables = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS transactions (
                 id SERIAL PRIMARY KEY,
-                cart_id INT REFERENCES cart(id) ON DELETE CASCADE,
                 user_id INT REFERENCES users(id) ON DELETE CASCADE,
-                pickup_date DATE,
-                checkout_date DATE,
+                items JSONB,
+                pickup_date TIMESTAMPTZ,
+                checkout_date TIMESTAMPTZ,
+                total_price DECIMAL(10, 2),
                 picked_up BOOLEAN DEFAULT FALSE
             );
         `);

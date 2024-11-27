@@ -1,4 +1,4 @@
-<body ng-controller="HistoryController">
+<body ng-controller="ReceiptController">
 
     <h1>Receipt for {{user.username}}</h1>
     
@@ -10,7 +10,6 @@
     <div ng-if="transactions.length > 0">
         <div ng-repeat="transaction in transactions">
             <h2>Transaction ID: {{transaction.id}}</h2>
-            <p>Pickup Date: {{transaction.pickup_date| date:'MMMM d, yyyy h:mm a'}}</p>
             <p>Checkout Date: {{transaction.checkout_date | date:'MMMM d, yyyy h:mm a'}}</p>
             <p>Total Price: {{transaction.total_price | currency}}</p>
 
@@ -21,13 +20,11 @@
                 </li>
             </ul>
 
-            <button ng-click="deleteTransaction(transaction.id)" class="btn btn-danger">
-                Delete Transaction
-            </button>
+            
+            <button ng-click="updatePickupDate(transaction.id)">Pickup</button>
+            <!-- address randomly generated from: https://www.fakepersongenerator.com/Random/generate_address -->
+            <h3>Don't forget to pick up your food at 182 Whitetail Lane Dallas, Texas 75201 in around {{transaction.predictedTime | date:'h:mm a'}} and enjoy!</h3>
         </div>
     </div>
 
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<script src="app.js"></script>
-</html>

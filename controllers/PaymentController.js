@@ -28,8 +28,25 @@ app.controller('PaymentController', ['$scope', '$http', '$window', '$location','
     $scope.paymentStatus = '';
 
     // Process the payment
-    $scope.processPayment = function() {
-        $location.path('/');
-        alert("payment processed!")
+    $scope.processPayment = function () {
+        // Prepare the receipt data
+        const Data = {
+            user_id: $scope.user.id,
+            items: $scope.result.items,
+            total_price: $scope.result.total_price,
+            checkout_date: new Date().toISOString()
+        };
+    
+        // creates a new transaction
+        $http.post(API+'/transactions', Data)
+            .then(function(response) {
+                $location.path('/'); 
+                alert('Transaction completed successfully!');
+            })
+            .catch(function(error) {
+                // Error - handle the error
+                console.error('Error processing payment:', error);
+                alert('There was an error processing your payment. Please try again.');
+            });
     };
 }]);
