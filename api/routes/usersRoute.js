@@ -48,10 +48,10 @@ router.post('/users', async (req, res) => {
     }
 
     try {
-        //hashing password
+        // hashing password
         const hashedPassword = await hashPassword(password);
 
-        //inserts into database
+        // inserts into database
         const result = await pool.query(
             'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id, username, email',
             [username, email, hashedPassword]
@@ -60,23 +60,29 @@ router.post('/users', async (req, res) => {
         res.status(201).json(result.rows[0]);
     } catch (error) {
         console.error(error);
-        if (error.code === '23505') { //23505 is the code for unique constraint violation
-            return res.status(400).json({ error: 'Email already exists' });
+        //23505 is unique constraint violation
+        if (error.code === '23505') {
+            if (error.constraint.includes('username')) {
+                return res.status(400).json({ error: 'Username already exists' });
+            }
+            if (error.constraint.includes('email')) {
+                return res.status(400).json({ error: 'Email already exists' });
+            }
         }
         res.status(500).json({ error: 'Database error' });
     }
 });
 
-//update user by id
+// Update user by id
 router.put('/users/:id', async (req, res) => {
     const userId = parseInt(req.params.id, 10);
-    const { username, email,password} = req.body;
+    const { username, email, password } = req.body;
 
-    if (!username || !email||!password) {
+    if (!username || !email || !password) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    //gets current user credentials
+    // Get the current user credentials
     const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
     const user = userResult.rows[0];
 
@@ -84,17 +90,17 @@ router.put('/users/:id', async (req, res) => {
         return res.status(404).json({ error: 'User not found' });
     }
 
-    //checks if password is correct
+    // Check if the password is correct
     const isCorrect = await bcrypt.compare(password, user.password);
     if (!isCorrect) {
-        return res.status(400).json({ error: 'password is incorrect' });
+        return res.status(400).json({ error: 'Password is incorrect' });
     }
 
     try {
-        //update the user in database
+        // Update the user in the database
         const result = await pool.query(
             'UPDATE users SET username = $1, email = $2 WHERE id = $3 RETURNING id, username, email',
-            [username, email,userId]
+            [username, email, userId]
         );
 
         if (result.rows.length === 0) {
@@ -104,6 +110,17 @@ router.put('/users/:id', async (req, res) => {
         res.status(200).json(result.rows[0]);
     } catch (error) {
         console.error(error);
+
+        //23505 is unique constraint violation
+        if (error.code === '23505') {
+            if (error.detail.includes('username')) {
+                return res.status(400).json({ error: 'Username already exists' });
+            } else if (error.detail.includes('email')) {
+                return res.status(400).json({ error: 'Email already exists' });
+            }
+        }
+
+        // Handle other database errors
         res.status(500).json({ error: 'Database error' });
     }
 });

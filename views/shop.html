@@ -10,7 +10,22 @@
     <h1>Food Shop</h1>
 
     <h3>Available Food Items</h3>
-    <!--food display-->
+
+    <!-- Search and Filter Form -->
+    <div>
+        <input type="text" ng-model="searchName" placeholder="Search by name">
+        <select ng-model="selectedCategory">
+            <option value="">Select Category</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Vegan">Vegan</option>
+            <option value="Side">Side</option>
+            <option value="Seafood">Seafood</option>
+        </select>
+        <!-- Submit Button to apply filters and search -->
+        <button ng-click="getFoodItems()">Submit</button>
+    </div>
+
+    <!-- Food Display -->
     <div ng-repeat="food in foodItems">
         <div>
             <img ng-src="{{ food.imagelink }}" alt="{{ food.name }}" class="food-image">
@@ -29,7 +44,6 @@
     <div ng-repeat="cartItem in cart">
         <p>
             {{ cartItem.food.name }} (x{{ cartItem.quantity }}) - ${{ (cartItem.food.price * cartItem.quantity).toFixed(2) }}
-            <!-- Add a minus button to decrease the quantity of the item -->
             <button ng-click="decreaseQuantity(cartItem)">-</button>
         </p>
     </div>
@@ -41,14 +55,9 @@
     <button ng-click="submitCart(user.id)">Submit Cart</button>
 
     <div class="pagination">
-        <!-- Previous Page Button -->
         <button ng-click="prevPage()" ng-disabled="page === 1">Previous</button>
-
-        <!-- Page Info -->
         <span>Page {{ page }} of {{ totalPages }}</span>
-
-        <!-- Next Page Button -->
         <button ng-click="nextPage()" ng-disabled="page === totalPages">Next</button>
     </div>
+
 </body>
-</html>

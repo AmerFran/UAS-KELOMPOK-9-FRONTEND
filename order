@@ -1,5 +1,5 @@
 order in which npm commands should be run
-
+npm install
 npm run drop (make sure theres no conflicting tables)
 npm run migrate
 npm run fakegen
