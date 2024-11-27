@@ -96,6 +96,72 @@ app.config(function($routeProvider) {
                 }
             }
         })
+        .when('/receipt', {
+            templateUrl: '/views/receipts.html',
+            controller: 'ReceiptController',
+            resolve: {
+                auth: function(AuthService, $location) {
+                    if (!AuthService.isAuthenticated()) {
+                        $location.path('/');
+                    }
+                }
+            }
+        })
+        .when('/history', {
+            templateUrl: '/views/history.html',
+            controller: 'HistoryController',
+            resolve: {
+                auth: function(AuthService, $location) {
+                    if (!AuthService.isAuthenticated()) {
+                        $location.path('/');
+                    }
+                }
+            }
+        })
+        .when('/userFoods', {
+            templateUrl: '/views/userFoods.html',
+            controller: 'FoodController',
+            resolve: {
+                auth: function(AuthService, $location) {
+                    if (!AuthService.isAuthenticated()) {
+                        $location.path('/');
+                    }
+                }
+            }
+        })
+        .when('/editFood', {
+            templateUrl: '/views/editFood.html',
+            controller: 'editFoodController',
+            resolve: {
+                auth: function(AuthService, $location) {
+                    if (!AuthService.isAuthenticated()) {
+                        $location.path('/');
+                    }
+                }
+            }
+        })
+        .when('/createFood', {
+            templateUrl: '/views/createFood.html',
+            controller: 'CreateFoodController',
+            resolve: {
+                auth: function(AuthService, $location) {
+                    if (!AuthService.isAuthenticated()) {
+                        $location.path('/');
+                    }
+                }
+            }
+        })
+        .when('/editFood/:foodId', {
+            templateUrl: '/views/editFood.html',
+            controller: 'EditFoodController',
+            resolve: {
+                auth: function(AuthService, $location) {
+                    if (!AuthService.isAuthenticated()) {
+                        $location.path('/');
+                    }
+                }
+            }
+        })
         .otherwise({
             redirectTo: '/'
         });

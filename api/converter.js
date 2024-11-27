@@ -30,6 +30,7 @@ async function fetchAndInsertData() {
         let category = categories[i];
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
         const data = await response.json();
+        const curr = new Date();
         if (data.meals && data.meals.length > 0) {
             for (let meal of data.meals) {
                 const name = meal.strMeal;
@@ -47,8 +48,9 @@ async function fetchAndInsertData() {
                 //inserts data into the database
                 try {
                     await pool.query(
-                        'INSERT INTO food (name, imagelink, category, price,ingredients,measurements,area,instructions) VALUES ($1, $2, $3, $4,$5,$6,$7,$8)',
-                        [name, imagelink, category, price,ingredients,measurements,area,instructions]
+                        //every food here is owned by user 1 thats why fakegen is runned first before converter
+                        'INSERT INTO food (name, imagelink, category, price,ingredients,measurements,area,instructions,user_id,creation_date) VALUES ($1, $2, $3, $4,$5,$6,$7,$8,$9,$10)',
+                        [name, imagelink, category, price,ingredients,measurements,area,instructions,1,curr]
                     );
                     console.log(`Inserted meal: ${name} (${category})`);
                 } catch (err) {

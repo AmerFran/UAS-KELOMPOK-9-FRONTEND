@@ -1,0 +1,28 @@
+<style>
+    /*placeholder for smaller image*/
+    .food-image {
+        width: 100px;
+        height: auto;
+    }
+</style>
+<body ng-controller="FoodController">
+
+    <div>
+        <h2>My Foods</h2>
+        <a href="#!/createFood">createFood</a>
+        
+        <div ng-repeat="food in foods">
+            <div>
+                <h3>{{ food.name }}</h3>
+                <img ng-src="{{ food.imagelink }}" alt="{{ food.name }}" class="food-image">
+                <p>Category: {{ food.category }}</p>
+                <p>Price: ${{ food.price }}</p>
+                <a href="#!/editFood/{{food.id}}">Edit</a>
+                <button ng-click="deleteFood(food.id)">Delete</button>
+            </div>
+        </div>
+        
+        
+    </div>
+</body>
+</html>

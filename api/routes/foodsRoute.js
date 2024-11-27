@@ -10,7 +10,7 @@ router.get('/foods', async (req, res) => {
     const page = parseInt(req.query.page);  // Optional page
     const limit = parseInt(req.query.limit);  // Optional limit
     
-    let query = 'SELECT id, name, category, area, imagelink, instructions, ingredients, measurements, price FROM food';
+    let query = 'SELECT id, user_id, name, category, area, imagelink, instructions, ingredients, measurements, price,creation_date FROM food';
     let params = [];
 
     // Build query conditions
@@ -64,7 +64,7 @@ router.get('/foods', async (req, res) => {
 router.get('/foods/:id', async (req, res) => {
     const foodId = parseInt(req.params.id, 10);
     try {
-        const result = await pool.query('SELECT id,name,category,area,imagelink,instructions,ingredients,measurements,price FROM food WHERE id = $1', [foodId]);
+        const result = await pool.query('SELECT id,name,category,area,imagelink,instructions,ingredients,measurements,price,creation_date FROM food WHERE id = $1', [foodId]);
         if (result.rows.length === 0) {
             return res.status(404).json({ error: 'Food not found' });
         }
@@ -77,7 +77,9 @@ router.get('/foods/:id', async (req, res) => {
 
 //create new food
 router.post('/foods', async (req, res) => {
-    const { name, imagelink, category, price,ingredients,measurements,area,instructions} = req.body;
+    const { name, imagelink, category, price,ingredients,measurements,area,instructions,user_id} = req.body;
+    //current time
+    const curr = new Date();
 
     if (!name || !price) {
         return res.status(400).json({ error: 'Name and price cannot be empty' });
@@ -85,8 +87,8 @@ router.post('/foods', async (req, res) => {
 
     try {
         const result = await pool.query(
-            'INSERT INTO food (name, imagelink, category, price,ingredients,measurements,area,instructions) VALUES ($1, $2, $3, $4,$5,$6,$7,$8) RETURNING id, name, imagelink, category, price',
-            [name, imagelink, category, price,ingredients,measurements,area,instructions]
+            'INSERT INTO food (name, imagelink, category, price,ingredients,measurements,area,instructions,user_id,creation_date) VALUES ($1, $2, $3, $4,$5,$6,$7,$8,$9,$10) RETURNING id, name, imagelink, category, price',
+            [name, imagelink, category, price,ingredients,measurements,area,instructions,user_id,curr]
         );
 
         res.status(201).json(result.rows[0]);
@@ -99,16 +101,12 @@ router.post('/foods', async (req, res) => {
 //update food by id
 router.put('/foods/:id', async (req, res) => {
     const foodId = parseInt(req.params.id, 10);
-    const { name, imagelink, category, price } = req.body;
-
-    if (!name || !price) {
-        return res.status(400).json({ error: 'Missing required fields' });
-    }
+    const { name, imagelink, category, price, ingredients, measurements, area, instructions } = req.body;
 
     try {
         const result = await pool.query(
-            'UPDATE food SET name = $1, imagelink = $2, category = $3, price = $4 WHERE id = $5 RETURNING id, name, imagelink, category, price',
-            [name, imagelink, category, price, foodId]
+            `UPDATE food SET name = $1, imagelink = $2, category = $3, price = $4, ingredients = $5, measurements = $6, area = $7, instructions = $8 WHERE id = $9 RETURNING id, name, imagelink, category, price, ingredients, measurements, area, instructions`,
+            [name, imagelink, category, price, ingredients, measurements, area, instructions, foodId]
         );
 
         if (result.rows.length === 0) {
@@ -121,6 +119,7 @@ router.put('/foods/:id', async (req, res) => {
         res.status(500).json({ error: 'Database error' });
     }
 });
+
 
 //delete food by id
 router.delete('/foods/:id', async (req, res) => {

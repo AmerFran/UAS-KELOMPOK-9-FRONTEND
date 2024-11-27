@@ -2,15 +2,7 @@
     <header class="header">
         <a href="#" class="logo">Healthy Living</a>
         <div id="menu" ng-click="toggleMenu()">&#x1F354;</div> 
-        <body ng-controller="NavBarController">
         <div ng-include="'navbar.html'"></div>
-        </body>
-        <div class="search-container">
-            <input type="text" id="searchString" ng-model="searchString">
-            <button class="search-icon" aria-label="Search" ng-click="searchEvent()">
-                🔍
-            </button>
-        </div>
     </header>
 
     <section class="home" id="home">
@@ -20,34 +12,40 @@
         </div>
     </section>
 
+    <section class="search-bar">
+        <div class="container">
+            <input type="text" ng-model="searchString" placeholder="Search for meals..." ng-keydown="checkEnter($event)">
+            <button ng-click="searchEvent()">Search</button>
+        </div>
+    </section>
+
     <section class="diet" id="diet">
         <h1 class="heading">diet plan</h1>
         <div class="container-diet">
-        <ul class="controls">
-            <li ng-repeat="category in categories" ng-click="filterCategory(category.name)">
-                <img ng-src="{{category.image}}" alt="">
-                <h3 class="bomber">{{category.name}}</h3>    
-            </li>
-        </ul>
-        <h1 class="heading" id="result">{{filteredCategory}}</h1>
-        <div class="image-container" id="filterResult">
-            <div class="box" ng-repeat="meal in filteredMeals">
-                <div class="image">
-                    <img ng-src="{{meal.imagelink}}" alt="">
-                </div>
-                <div class="content">
-                    <a href="#!ingredient?mealId={{meal.id}}&description={{meal.description}}" target="_blank" class="link">{{meal.name}}</a>
-                    <p>{{meal.description}}</p>
-                    <div class="icon">
-                        <a href="#"><i class="fas fa-clock"></i>22 September 2024</a>
-                        <a href="#"><i class="fas fa-clock"></i>by amer</a>
+            <ul class="controls">
+                <li ng-repeat="category in categories" ng-click="filterCategory(category.name)">
+                    <img ng-src="{{category.image}}" alt="">
+                    <h3 class="bomber">{{category.name}}</h3>
+                </li>
+            </ul>
+            <h1 class="heading" id="result">{{filteredCategory}}</h1>
+            <div class="image-container" id="filterResult">
+                <div class="box" ng-repeat="meal in filteredMeals">
+                    <div class="image">
+                        <img ng-src="{{meal.imagelink}}" alt="">
+                    </div>
+                    <div class="content">
+                        <a href="#!ingredient?mealId={{meal.id}}&description={{meal.description}}" target="_blank" class="link">{{meal.name}}</a>
+                        <p>{{meal.description}}</p>
+                        <div class="icon">
+                            <a href="#"><i class="fas fa-clock"></i>{{meal.creation_date | date:'MMMM d, yyyy'}}</a>
+                            <a href="#"><i class="fas fa-clock"></i>by {{meal.username}}</a>
+                        </div>
                     </div>
                 </div>
-            <div>
-
+            </div>
         </div>
     </section>
-</div>
 
     <div class="social-icons">
         <a href="https://github.com/AmerFran/KELOMPOK-9-FRONTEND"> 
@@ -64,8 +62,7 @@
         </a>
     </div>
 
-    <ul class="list">
-    </ul>
+    <ul class="list"></ul>
     <p class="copyright">
         © Healthy Living | All Rights Reserved
     </p>

@@ -3,6 +3,8 @@ import pool from '../../database.js';
 
 const router = express.Router();
 
+// Transaction endpoints --------------------------------------------
+
 // Get all transactions
 router.get('/transactions', async (req, res) => {
     try {
@@ -14,7 +16,7 @@ router.get('/transactions', async (req, res) => {
     }
 });
 
-// Get a transaction by ID
+// Get transaction by id
 router.get('/transactions/:id', async (req, res) => {
     const transactionId = parseInt(req.params.id, 10);
     try {
@@ -31,17 +33,21 @@ router.get('/transactions/:id', async (req, res) => {
 
 // Create a new transaction
 router.post('/transactions', async (req, res) => {
-    const { cart_id, user_id, pickup_date, checkout_date, picked_up } = req.body;
+    const { user_id, items, checkout_date, total_price } = req.body;
 
-    if (!cart_id || !user_id || !checkout_date) {
-        return res.status(400).json({ error: 'Missing required fields' });
+    if (!user_id || !Array.isArray(items) || !checkout_date || !total_price) {
+        return res.status(400).json({ error: 'Missing or invalid required fields' });
     }
 
     try {
+        // JSON conversion for items
+        const jItems = JSON.stringify(items);
+
         const result = await pool.query(
-            'INSERT INTO transactions (cart_id, user_id, pickup_date, checkout_date, picked_up) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [cart_id, user_id, pickup_date, checkout_date, picked_up || false]
+            'INSERT INTO transactions (user_id, items, checkout_date, total_price) VALUES ($1, $2, $3, $4) RETURNING *',
+            [user_id, jItems, checkout_date, total_price]
         );
+        
         res.status(201).json(result.rows[0]);
     } catch (error) {
         console.error(error);
@@ -49,15 +55,22 @@ router.post('/transactions', async (req, res) => {
     }
 });
 
-// Update a transaction by ID
+// Update transaction by id
 router.put('/transactions/:id', async (req, res) => {
     const transactionId = parseInt(req.params.id, 10);
-    const { pickup_date, checkout_date, picked_up } = req.body;
+    const { items, pickup_date, checkout_date, total_price } = req.body;
+
+    if (!Array.isArray(items) || !pickup_date || !checkout_date || typeof total_price !== 'number') {
+        return res.status(400).json({ error: 'Missing or invalid required fields' });
+    }
 
     try {
+        // JSON conversion for items
+        const jItems = JSON.stringify(items);
+
         const result = await pool.query(
-            'UPDATE transactions SET pickup_date = $1, checkout_date = $2, picked_up = $3 WHERE id = $4 RETURNING *',
-            [pickup_date, checkout_date, picked_up, transactionId]
+            'UPDATE transactions SET items = $1, pickup_date = $2, checkout_date = $3, total_price = $4 WHERE id = $5 RETURNING *',
+            [jItems, pickup_date, checkout_date, total_price, transactionId]
         );
 
         if (result.rows.length === 0) {
@@ -71,7 +84,7 @@ router.put('/transactions/:id', async (req, res) => {
     }
 });
 
-// Delete a transaction by ID
+// Delete transaction by id
 router.delete('/transactions/:id', async (req, res) => {
     const transactionId = parseInt(req.params.id, 10);
     try {
@@ -80,6 +93,48 @@ router.delete('/transactions/:id', async (req, res) => {
             return res.status(404).json({ error: 'Transaction not found' });
         }
         res.status(200).json({ message: 'Transaction deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
+// Get transactions by user ID
+router.get('/transactions/user/:userId', async (req, res) => {
+    const userId = req.params.userId;  // Get user ID from URL parameter
+
+    const query = 'SELECT * FROM transactions WHERE user_id = $1';
+    
+    try {
+        const result = await pool.query(query, [userId]);
+
+        // Check if the result has any rows
+        if (result.rows.length > 0) {
+            return res.json({ transactions: result.rows });
+        } else {
+            return res.json({ transactions: [] });
+        }
+    } catch (error) {
+        console.error('Error fetching transactions:', error);
+        return res.status(500).json({ message: 'Error fetching transactions', error });
+    }
+});
+
+// Update pickup_date to the current time
+router.put('/transactions/pickup/:id', async (req, res) => {
+    const transactionId = parseInt(req.params.id, 10);
+    const currentTime = new Date(); // Get the current time
+
+    try {
+        const result = await pool.query(
+            'UPDATE transactions SET pickup_date = $1 WHERE id = $2 RETURNING *',
+            [currentTime, transactionId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Transaction not found' });
+        }
+        res.status(200).json(result.rows[0]);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Database error' });
