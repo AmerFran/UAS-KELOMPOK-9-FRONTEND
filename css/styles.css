@@ -83,19 +83,19 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 9%;
+    padding: 0.5rem 9%;
     background: var(--primary);
     box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
 .header .logo {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: bolder;
     color: var(--main-color);
 }
 
 .header .navbar a {
-    font-size: 1.7rem;
+    font-size: 2rem;
     margin-left: 2rem;
     color: var(--black);
 }
@@ -134,12 +134,11 @@ section {
     padding-bottom: 3.5rem;
 }
 
-/* Parallax Video For About */ */
-.parallax-video {
+
+.about-video {
     position: relative;
     height: 100vh; 
     overflow: hidden;
-    background-color: black; 
 }
 
 #background-video {
@@ -153,7 +152,7 @@ section {
     z-index: -1;
 }
 
-.parallax-video .content {
+.about-video .content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -163,7 +162,7 @@ section {
     z-index: 1;
 }
 
-.parallax-video .content h2 {
+.about-video .content h2 {
     font-family: 'Roboto Flex', sans-serif;
     font-size: 8rem;
     margin-bottom: 2rem;
@@ -172,11 +171,11 @@ section {
 
 /* About Section */
 .about {
-    padding-top: 80rem; 
+    padding-top: 5rem; 
 }
 
 .about .heading{
-    margin-top: 40rem;
+    margin-top: 5rem;
 }
 
 .about .row {
@@ -543,6 +542,21 @@ section {
     margin-top: 2rem;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    font-size: 2.5rem;
+}
+
+.logo-img {
+    width: 5.5rem; /* Atur ukuran sesuai kebutuhan */
+    height: auto;
+    margin-right: 0.5rem; /* Jarak antara logo dan teks */
+}
+
+
 @media (max-width: 768px) {
     html {
         font-size: 55%;
@@ -653,10 +667,10 @@ section {
     }
 }
 
-.header .search-container {
+/* .header .search-container {
     margin-left: 2rem;
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center items vertically */
+    display: flex; 
+    align-items: center; 
 }
 
 .header .search-container input {
@@ -666,7 +680,7 @@ section {
     border-radius: 4px; 
     outline: none;
     transition: border-color 0.3s;
-    flex-grow: 1; /* Allow input to take available space */
+    flex-grow: 1; 
 }
 
 .header .search-container input:focus {
@@ -679,29 +693,33 @@ section {
     cursor: pointer;
     font-size: 1.5rem; 
     margin-left: 0.5rem; 
-}
+} */
 
+/* Results Section Styling */
 .results {
-    padding: 6rem;
-    text-align: center;
+    padding: 5rem 9%; 
+    background-color: #f9f9f9;
 }
 
 .results .heading {
     font-size: 4rem;
     color: var(--main-color);
-    margin-bottom: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
-.results p {
-    font-size: 2rem;
+.results .intro-text {
+    font-size: 1.8rem;
     color: var(--light-black);
-    margin-bottom: 6rem;
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 .success-stories {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    margin-bottom: 3rem;
 }
 
 .success-stories .story {
@@ -716,35 +734,30 @@ section {
     transform: scale(1.05);
 }
 
-.success-stories .story h3 {
+.success-stories .story-title {
     font-size: 2.5rem;
     color: var(--main-color);
     margin-bottom: 1rem;
 }
 
-.success-stories .story p {
-    font-size: 1.8rem;
+.success-stories .story-message {
+    font-size: 1.6rem;
     color: var(--black);
     line-height: 1.6;
 }
 
 .experience-input {
-    margin-top: 3rem;
-    text-align: left;
-    max-width: 600px;
-    margin: 3rem auto;
     background-color: var(--white);
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 3rem;
 }
 
-.experience-input label {
-    font-size: 1.8rem;
+.experience-input h2 {
+    font-size: 2.5rem;
     color: var(--main-color);
     margin-bottom: 1rem;
-    display: block;
 }
 
 .experience-input textarea {
@@ -752,15 +765,21 @@ section {
     padding: 1rem;
     font-size: 1.6rem;
     border-radius: 0.5rem;
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--light-black);
     resize: vertical;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.character-counter {
+    font-size: 1.4rem;
+    color: var(--light-black);
+    margin-bottom: 1rem;
 }
 
 .experience-input button {
     padding: 1rem 2rem;
     background-color: var(--main-color);
-    color: white;
+    color: var(--white);
     border: none;
     border-radius: 0.5rem;
     font-size: 1.6rem;
@@ -768,11 +787,100 @@ section {
     transition: background-color 0.3s ease;
 }
 
-.experience-input:hover {
-    transform: scale(1.05);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+.experience-input button:hover {
+    background-color: var(--primary);
 }
 
+.delete-btn {
+    background-color: #f44336; /* Red color for delete button */
+    margin-top: 2rem;
+}
+
+.delete-btn:hover {
+    background-color: #e53935; /* Darker red for hover */
+}
 .bomber{
     font-size: 25px;
 }
+/* Container for the form */
+.form-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Header Styles */
+.form-container h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Submit Button */
+.submit-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+/* Register Button (Back to Login) */
+.register-button {
+    width: 100%;
+    padding: 14px;
+    background-color: transparent;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0;
+}
+
+.register-button:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+/* Conditional Visibility Styles */
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+

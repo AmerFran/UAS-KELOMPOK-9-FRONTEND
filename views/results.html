@@ -1,18 +1,21 @@
 <div ng-controller="AboutServicesController">
     <header class="header">
-        <a href="#" class="logo">Healthy Living</a> 
-        <div id="menu" ng-click="toggleMenu()">&#x1F354;</div> 
+        <a href="#" class="logo">
+            <img src="../assets/image/logo.jpg" alt="Healthy Living Logo" class="logo-img">
+            Healthy Living
+        </a>
+        <div id="menu" ng-click="toggleMenu()">&#x1F354;</div>
         <div ng-include="'navbar.html'"></div>
     </header>
 
     <section class="results" id="results" ng-controller="ResultsController">
         <h1 class="heading">{{ message }}</h1>
-        <p>Read about our clients' journeys to better health and wellness:</p>
+        <p class="intro-text">Read about our clients' journeys to better health and wellness:</p>
 
         <div class="success-stories">
             <div class="story" ng-repeat="story in stories">
-                <h3>{{ story.title }}</h3>
-                <p>{{ story.message }}</p> 
+                <h3 class="story-title">{{ story.title }}</h3>
+                <p class="story-message">{{ story.message }}</p>
             </div>
         </div>
 
@@ -20,17 +23,16 @@
             <h2>Share Your Experience:</h2>
             <textarea id="user-experience" placeholder="Tell us about your journey..." rows="5" ng-model="userExperience" maxlength="500"></textarea>
             <div class="character-counter">{{ 500 - (userExperience.length || 0) }} characters remaining</div>
-            <button type="button" ng-click="submitExperience()" ng-disabled="userExperience.length > 500">Submit</button>
+            <button type="button" ng-click="submitExperience()" ng-disabled="userExperience.length > 500" class="btn">Submit</button>
         </div>
 
         <div class="experience-input" ng-show="hasUserStory">
             <h2>Edit Your Experience:</h2>
             <textarea id="edit-experience" placeholder="Update your message..." rows="5" ng-model="editedMessage" maxlength="500">{{ editedMessage }}</textarea>
             <div class="character-counter">{{ 500 - (editedMessage.length || 0) }} characters remaining</div>
-            <button type="button" ng-click="updateExperience()" ng-disabled="editedMessage.length > 500">Update</button>
+            <button type="button" ng-click="updateExperience()" ng-disabled="editedMessage.length > 500" class="btn">Update</button>
         </div>
 
-        <button ng-click="deleteStory(user.id)">Delete</button>
-
+        <button ng-click="deleteStory(user.id)" class="btn delete-btn">Delete</button>
     </section>
 </div>

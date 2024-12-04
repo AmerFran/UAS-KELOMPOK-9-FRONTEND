@@ -1,11 +1,14 @@
 <div ng-controller="AboutServicesController">
     <header class="header">
-        <a href="#" class="logo">Healthy Living</a> 
-        <div id="menu" ng-click="toggleMenu()">&#x1F354;</div> 
+        <a href="#" class="logo">
+            <img src="../assets/image/logo.jpg" alt="Healthy Living Logo" class="logo-img">
+            Healthy Living
+        </a>
+        <div id="menu" ng-click="toggleMenu()">&#x1F354;</div>
         <div ng-include="'navbar.html'"></div>
     </header>
 
-    <section class="parallax-video">
+    <section class="about-video">
         <video id="background-video" autoplay loop muted>
             <source src="../assets/video/about.mp4" type="video/mp4">
         </video>
