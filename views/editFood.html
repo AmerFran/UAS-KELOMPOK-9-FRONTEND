@@ -1,65 +1,68 @@
+<link rel="stylesheet" href="../css/edit.css">
 <body ng-controller="EditFoodController">
 
-    <h1>Edit Food</h1>
+    <div class="container">
+        <h1 class="title">Edit Food</h1>
+    </div>
+    
 
-    <form name="foodForm" ng-submit="updateFood()">
-        <div>
-            <label for="name">Food Name:</label>
-            <input type="text" id="name" ng-model="food.name" required>
+    <form name="foodForm" ng-submit="updateFood()" class="food-form">
+        <div class="form-group">
+            <label for="name" class="form-label">Food Name:</label>
+            <input type="text" id="name" ng-model="food.name" required class="form-input">
         </div>
 
-        <div>
-            <label for="imagelink">Image Link:</label>
-            <input type="text" id="imagelink" ng-model="food.imagelink">
+        <div class="form-group">
+            <label for="imagelink" class="form-label">Image Link:</label>
+            <input type="text" id="imagelink" ng-model="food.imagelink" class="form-input">
         </div>
 
-        <div>
-            <label for="category">Category:</label>
-            <select id="category" ng-model="food.category" required>
+        <div class="form-group">
+            <label for="category" class="form-label">Category:</label>
+            <select id="category" ng-model="food.category" required class="form-select">
                 <option value="" disabled>Select a category</option>
                 <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
             </select>
         </div>
 
-        <div>
-            <label for="price">Price:</label>
-            <input type="number" id="price" ng-model="food.price" required>
+        <div class="form-group">
+            <label for="price" class="form-label">Price:</label>
+            <input type="number" id="price" ng-model="food.price" required class="form-input">
         </div>
 
-        <div>
-            <label>Ingredients and Measurements:</label>
+        <div class="form-group">
+            <label class="form-label">Ingredients and Measurements:</label>
             <div ng-repeat="ingredient in food.ingredients track by $index" class="ingredient-item">
-                <input type="text" ng-model="food.ingredients[$index]" placeholder="Ingredient" ng-required="true" />
-                <input type="text" ng-model="food.measurements[$index]" placeholder="Measurement" ng-required="true" />
-                <button type="button" ng-click="removeIngredient($index)">Remove</button>
+                <input type="text" ng-model="food.ingredients[$index]" placeholder="Ingredient" ng-required="true" class="ingredient-input">
+                <input type="text" ng-model="food.measurements[$index]" placeholder="Measurement" ng-required="true" class="measurement-input">
+                <button type="button" ng-click="removeIngredient($index)" class="remove-btn">Remove</button>
             </div>
-            <button type="button" ng-click="addIngredient()">Add Ingredient</button>
+            <button type="button" ng-click="addIngredient()" class="add-btn">Add Ingredient</button>
         </div>
 
-        <div>
-            <label for="area">Area:</label>
-            <input type="text" id="area" ng-model="food.area">
+        <div class="form-group">
+            <label for="area" class="form-label">Area:</label>
+            <input type="text" id="area" ng-model="food.area" class="form-input">
         </div>
 
-        <div>
-            <label for="instructions">Instructions:</label>
-            <textarea id="instructions" ng-model="food.instructions"></textarea>
+        <div class="form-group">
+            <label for="instructions" class="form-label">Instructions:</label>
+            <textarea id="instructions" ng-model="food.instructions" class="form-textarea"></textarea>
         </div>
 
-        <div>
-            <button type="submit" ng-disabled="foodForm.$invalid">Update Food</button>
+        <div class="form-group">
+            <button type="submit" ng-disabled="foodForm.$invalid" class="submit-btn">Update Food</button>
         </div>
     </form>
 
-    <div ng-if="errorMessage" class="error">
+    <div ng-if="errorMessage" class="error-message">
         <p>{{errorMessage}}</p>
     </div>
 
-    <div ng-if="successMessage" class="success">
+    <div ng-if="successMessage" class="success-message">
         <p>{{successMessage}}</p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="app.js"></script>
 </body>
-</

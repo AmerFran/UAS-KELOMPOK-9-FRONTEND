@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+:root {
+    --main-color: green;
+    --primary: white;
+    --black: #141414;
+    --white: white;
+    --bg: white;
+    --light-black: #666;
+    --text-color: var(--black);
+    
+}
 
 body.userFoods-page {
     font-family: 'Arial', sans-serif;
@@ -18,22 +30,22 @@ body.userFoods-page {
 
 
 .userFoods-title {
-    font-size: 2.5rem; /* Perbesar ukuran font */
+    font-size: 2.5rem; 
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
-    color: #4d9319; /* Warna hijau modern */
+    color: var(--main-color)
 }
 
 
 /* Create Food Link */
 .userFoods-create {
-    background-color: #326d1a; /* Warna hijau modern */
+    background-color: var(--main-color);
     color: white;
     display: block;
-    width: 200px; /* Lebar tombol */
+    width: 200px; 
     text-align: center;
-    margin: 20px auto; /* Center tombol */
+    margin: 20px auto; 
     padding: 10px 0;
 }
 
@@ -63,14 +75,14 @@ body.userFoods-page {
 
 .userFoods-search-input:focus,
 .userFoods-search-select:focus {
-    border-color: #28a745;
+    border-color: var(--main-color);
 }
 
 .userFoods-search-button {
     padding: 10px 20px;
     font-size: 1rem;
     color: #fff;
-    background-color: #389918;
+    background-color: var(--main-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -106,30 +118,30 @@ body.userFoods-page {
 }
 
 .userFoods-item-title {
-    font-size: 1.5rem; /* Perbesar judul makanan */
+    font-size: 1.5rem; 
     font-weight: bold;
-    color: #264653; /* Warna gelap elegan */
+    color: #264653; 
     text-align: center;
     margin: 10px 0;
 }
 
-/* Gambar di Food Items */
+
 /* Food Items Gambar */
 .userFoods-item-image {
-    display: block; /* Pastikan gambar dianggap sebagai blok */
-    margin: 0 auto; /* Centering gambar secara horizontal */
-    max-width: 100%; /* Pastikan gambar tidak melampaui lebar kontainer */
-    height: auto; /* Membiarkan tinggi menyesuaikan secara proporsional */
-    border-radius: 50px; /* Berikan sedikit melengkung pada sudut gambar */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan agar lebih menarik */
+    display: block; 
+    margin: 0 auto; 
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 
 
 .userFoods-item-category,
 .userFoods-item-price {
-    font-size: 1.2rem; /* Perbesar detail item */
-    color: #555; /* Warna teks abu-abu */
+    font-size: 1.2rem; 
+    color: #555; 
     text-align: center;
 }
 
@@ -139,23 +151,23 @@ body.userFoods-page {
 .userFoods-search-button, 
 .userFoods-pagination-prev, 
 .userFoods-pagination-next {
-    font-size: 1.2rem; /* Perbesar teks tombol */
-    padding: 10px 20px; /* Tambahkan padding */
-    border-radius: 8px; /* Membuat tombol melengkung */
-    border: none; /* Hilangkan border default */
-    cursor: pointer; /* Ganti kursor menjadi pointer */
-    transition: all 0.3s ease; /* Efek animasi hover */
+    font-size: 1.2rem; 
+    padding: 10px 20px; 
+    border-radius: 8px; 
+    border: none; 
+    cursor: pointer; 
+    transition: all 0.3s ease; /
 }
 
 .userFoods-item-edit {
-    background-color: #13800f; /* Warna oranye lembut */
+    background-color: var(--main-color); 
     color: white;
     margin-right: 5px;
 }
 
 
 .userFoods-item-edit:hover {
-    background-color: #154e11; /* Warna hover lebih gelap */
+    background-color: #154e11; 
 }
 
 .userFoods-item-delete {
@@ -181,7 +193,7 @@ body.userFoods-page {
     padding: 10px 15px;
     font-size: 1rem;
     color: #fff;
-    background-color:  #218918;
+    background-color:  var(--main-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;

@@ -6,7 +6,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'foodBase',
-  password: '123456',
+  password: 'oreokuning',
   port: 5432,
 });
 export default pool;
