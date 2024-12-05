@@ -25,9 +25,6 @@ app.controller('PaymentController', ['$scope', '$http', '$window', '$location','
         console.error("Error fetching data:", error);
     });
 
-    $scope.paymentStatus = '';
-
-    // Process the payment
     $scope.processPayment = function () {
         // Prepare the receipt data
         const Data = {
@@ -40,7 +37,7 @@ app.controller('PaymentController', ['$scope', '$http', '$window', '$location','
         // creates a new transaction
         $http.post(API+'/transactions', Data)
             .then(function(response) {
-                $location.path('/'); 
+                $location.path('/receipt'); 
                 alert('Transaction completed successfully!');
             })
             .catch(function(error) {
@@ -48,5 +45,5 @@ app.controller('PaymentController', ['$scope', '$http', '$window', '$location','
                 console.error('Error processing payment:', error);
                 alert('There was an error processing your payment. Please try again.');
             });
-    };
+    };    
 }]);
