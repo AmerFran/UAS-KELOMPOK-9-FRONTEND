@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+:root {
+    --main-color: green;
+    --primary: white;
+    --black: #141414;
+    --white: white;
+    --bg: white;
+    --light-black: #666;
+    --text-color: var(--black);
+    
+}
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    margin: 20px auto; 
+    padding: 10px; 
+    max-width: 800px; 
+}
+
+/* Title */
+.title {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--main-color);
+    margin: 0 auto; 
+}
+
+/* Form Styles */
+.food-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.form-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Inputs and Select */
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.form-select {
+    padding: 10px;
+    background-color: #fff;
+}
+
+.form-textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: var(--main-color);
+    outline: none;
+}
+
+/* Buttons */
+.submit-btn,
+.add-btn,
+.remove-btn {
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover,
+.add-btn:hover,
+.remove-btn:hover {
+    background-color: #194119;
+}
+
+/* Ingredient Fields */
+.ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.ingredient-input,
+.measurement-input {
+    width: 45%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.ingredient-input:focus,
+.measurement-input:focus {
+    border-color: #5cb85c;
+    outline: none;
+}
+
+/* Error & Success Messages */
+.error-message,
+.success-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+}
+
+.error-message {
+    background-color: #d9534f;
+}
+
+.success-message {
+    background-color: #5bc0de;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .food-form {
+        padding: 15px;
+    }
+
+    .ingredient-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ingredient-input,
+    .measurement-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

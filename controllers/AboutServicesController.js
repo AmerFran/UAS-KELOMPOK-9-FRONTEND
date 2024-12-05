@@ -36,18 +36,21 @@ app.controller('AboutServicesController', function($scope) {
     $scope.bmiData = {
         height: null,
         weight: null,
+        age: null,
+        gender: null,
     };
-
+    
     $scope.bmiResult = null;
     $scope.bmiCategory = "";
-
+    $scope.bmiMessage = "";
+    
     $scope.calculateBMI = function () {
-        if ($scope.bmiData.height && $scope.bmiData.weight) {
+        if ($scope.bmiData.height && $scope.bmiData.weight && $scope.bmiData.age && $scope.bmiData.gender) {
             const heightInMeters = $scope.bmiData.height / 100;
             $scope.bmiResult = (
                 $scope.bmiData.weight / (heightInMeters * heightInMeters)
             ).toFixed(2);
-
+    
             // Tentukan kategori BMI
             if ($scope.bmiResult < 18.5) {
                 $scope.bmiCategory = "Underweight";
@@ -58,11 +61,24 @@ app.controller('AboutServicesController', function($scope) {
             } else {
                 $scope.bmiCategory = "Obesity";
             }
+    
+            // Tentukan pesan tambahan berdasarkan usia dan jenis kelamin
+            if ($scope.bmiData.age < 18) {
+                $scope.bmiMessage = "Note: BMI calculations may not be accurate for children under 18.";
+            } else if ($scope.bmiData.gender === "female" && $scope.bmiCategory === "Normal weight") {
+                $scope.bmiMessage = "Great job! Maintaining a healthy BMI is especially beneficial for women's health.";
+            } else if ($scope.bmiData.gender === "male" && $scope.bmiCategory === "Overweight") {
+                $scope.bmiMessage = "Consider consulting with a healthcare professional about managing weight.";
+            } else {
+                $scope.bmiMessage = "Always aim for a balanced diet and regular exercise for optimal health.";
+            }
         } else {
             $scope.bmiResult = null;
             $scope.bmiCategory = "";
+            $scope.bmiMessage = "";
         }
     };
+    
 
     // Social media links
     $scope.socialLinks = [
