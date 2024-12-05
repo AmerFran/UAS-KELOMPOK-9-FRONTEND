@@ -28,6 +28,12 @@ body {
     max-width: 800px; 
 }
 
+.back-button-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 20px;
+}
+
 /* Title */
 .title {
     font-size: 36px;
@@ -89,6 +95,21 @@ body {
 }
 
 /* Buttons */
+.back-btn {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 33rem;
+    margin-top: 5rem;
+    text-decoration: none;  /* Menghapus garis bawah jika menggunakan <a> */
+    display: inline-block;  /* Agar tombol tetap tampil dengan styling */
+}
+
 .submit-btn,
 .add-btn,
 .remove-btn {

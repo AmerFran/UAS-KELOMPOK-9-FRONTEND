@@ -50,4 +50,9 @@ app.controller('CreateFoodController', ['$scope','$location', 'CreateFoodService
             $scope.errorMessage = 'Please fill in all required fields.';
         }
     };
+
+    //back button
+    $scope.goBack = function() {
+        $location.path('/userFoods')
+    };
 }]);

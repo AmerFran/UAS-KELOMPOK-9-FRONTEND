@@ -74,5 +74,10 @@ app.controller('EditFoodController', ['$scope','$location', '$routeParams', 'Aut
             alert('Please fill in all required fields.');
         }
     };
+    
+    //back button
+    $scope.goBack = function() {
+        $location.path('/userFoods')
+    };
 }]);
     
