@@ -7,7 +7,7 @@
     --white: white;
     --bg: white;
     --light-black: #666;
-    --text-color: var(--black); /* Menambahkan variabel untuk teks */
+    --text-color: var(--black);
     
 }
 
@@ -25,7 +25,7 @@
 
 html {
     font-size: 62.5%;
-    overflow-x: hidden; /* Menghilangkan overflow horizontal */
+    overflow-x: hidden; 
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
 }
@@ -175,7 +175,7 @@ section {
 }
 
 .about .heading{
-    margin-top: 5rem;
+    margin-top: 9rem;
 }
 
 .about .row {
@@ -190,13 +190,13 @@ section {
 }
 
 .about .row .content h3 {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     color: var(--black);
     text-transform: uppercase;
 }
 
 .about .row .content p {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     color: var(--light-black);
     padding: 2rem 0;
     line-height: 2;
@@ -208,11 +208,43 @@ section {
 
 .about .row .image img {
     width: 100%;
-    max-width: 100%; /* Memastikan responsif */
-    height: auto; /* Memastikan rasio aspek tetap */
+    max-width: 100%; 
+    height: auto; 
 }
 /* About Section End Here */
+/* Styling untuk search bar */
+.search-bar {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
 
+.search-bar-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin-right: 10px; 
+}
+
+.search-btn,.diet-btnL,.diet-btnR {
+    padding: 10px 20px;
+    background-color:var(--main-color); 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 2rem;
+}
+
+.search-btn:hover,.diet-btnL:hover,.diet-btnR:hover {
+    background-color:rgb(53, 199, 48);
+}
 
 /* Service Section */
 .services {
@@ -269,7 +301,7 @@ section {
 }
 
 .services .box-container .box .content h3 {
-    font-size: 2rem;
+    font-size: 3.2rem;
     padding: 1rem 0;
     color: var(--main-color);
 }
@@ -283,7 +315,7 @@ section {
 }
 
 .services .box-container .box .content p {
-    font-size: 1.4rem;
+    font-size: 2.2rem;
     color: var(--black);
     line-height: 2;
     text-align: justify; 
@@ -301,6 +333,7 @@ section {
     color: var(--black);
     display: flex; 
     align-items: center; 
+    font-size: 2rem;
 }
 
 .services .box-container .box .content ul li i {
@@ -323,11 +356,15 @@ section {
 }
 
 .bmi-calculator .heading {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: bold;
-    color: #2e8b57; /* Sea Green */
+    color: #2e8b57;
     margin-bottom: 1rem;
     text-transform: uppercase;
+}
+
+.bmi-calculator .weight,.bmi-calculator .height,.bmi-calculator .calculate-btn,.bmi-calculator .result,.bmi-calculator .bmi-result{
+    font-size: 15px;
 }
 
 .calculator-container {
@@ -348,20 +385,20 @@ section {
 .calculator-container label {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #333; /* Dark text color */
+    color: #333; 
 }
 
 .calculator-container input {
     padding: 0.8rem;
     font-size: 1rem;
-    border: 2px solid #2e8b57; /* Sea Green border */
+    border: 2px solid #2e8b57;
     border-radius: 5px;
     outline: none;
     transition: border-color 0.3s;
 }
 
 .calculator-container input:focus {
-    border-color: #20b2aa; /* Light Sea Green on focus */
+    border-color: #20b2aa;
 }
 
 .calculate-btn {
@@ -369,7 +406,7 @@ section {
     font-size: 1rem;
     font-weight: bold;
     color: #fff;
-    background-color: #2e8b57; /* Sea Green */
+    background-color: #2e8b57;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -377,15 +414,29 @@ section {
 }
 
 .calculate-btn:hover {
-    background-color: #20b2aa; /* Light Sea Green on hover */
+    background-color: #20b2aa;
     transform: scale(1.05);
+}
+
+.results-container {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .result {
     margin-top: 1.5rem;
     padding: 1rem;
     font-size: 1.2rem;
-    color: #2e8b57; /* Sea Green */
+    color: #2e8b57;
     font-weight: bold;
     background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
@@ -418,11 +469,11 @@ section {
 }
 
 .diet {
-    margin-top: 15rem;
+    margin-top: 5rem;
 }
 
 .diet .heading {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
 }
 
 .diet .controls .buttons {
@@ -522,11 +573,14 @@ section {
     text-align: center;
 }
 
+.diet-pages{
+    font-size: 15px;
+}
 
 .social-icons {
     display: flex;
     justify-content: center;
-    margin: 3rem 0;
+    margin-top: 10rem;
 }
 
 .social-icons a {
@@ -551,9 +605,9 @@ section {
 }
 
 .logo-img {
-    width: 5.5rem; /* Atur ukuran sesuai kebutuhan */
+    width: 5.5rem; 
     height: auto;
-    margin-right: 0.5rem; /* Jarak antara logo dan teks */
+    margin-right: 0.5rem; 
 }
 
 
@@ -667,33 +721,7 @@ section {
     }
 }
 
-/* .header .search-container {
-    margin-left: 2rem;
-    display: flex; 
-    align-items: center; 
-}
 
-.header .search-container input {
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    border: 1px solid var(--black);
-    border-radius: 4px; 
-    outline: none;
-    transition: border-color 0.3s;
-    flex-grow: 1; 
-}
-
-.header .search-container input:focus {
-    border-color: var(--main-color);
-}
-
-.header .search-icon {
-    background: transparent;
-    border: none; 
-    cursor: pointer;
-    font-size: 1.5rem; 
-    margin-left: 0.5rem; 
-} */
 
 /* Results Section Styling */
 .results {

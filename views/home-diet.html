@@ -11,17 +11,18 @@
     <section class="home" id="home">
         <div class="content">
             <h3>Discover Delicious and Nutritious Recipes for a Healthier You!</h3>
-            <a href="#about" class="btn">read more</a>
+            <a href="#!about-services" class="btn">read more</a>
         </div>
     </section>
 
     <section class="search-bar">
         <div class="container">
-            <input type="text" ng-model="searchString" placeholder="Search for meals..." ng-keydown="checkEnter($event)">
-            <button ng-click="searchEvent()">Search</button>
+            <input type="text" class="search-bar-input" ng-model="searchString" placeholder="Search for meals..." ng-keydown="checkEnter($event)">
+            <button class="search-btn" ng-click="searchEvent()">Search</button>
         </div>
     </section>
-
+    
+    
     <section class="diet" id="diet">
         <h1 class="heading">diet plan</h1>
         <div class="container-diet">
@@ -49,30 +50,19 @@
             </div>
             <!-- Pagination Controls -->
             <div class="pagination" ng-if="filteredMeals.length > 0">
-                <button ng-click="previousPage()" ng-disabled="page === 1">Previous</button>
-                <span>Page {{page}} of {{totalPages}}</span>
-                <button ng-click="nextPage()" ng-disabled="page === totalPages">Next</button>
+                <button class="diet-btnL" ng-click="previousPage()" ng-disabled="page === 1">Previous</button>
+                <span class="diet-pages">Page {{page}} of {{totalPages}}</span>
+                <button class="diet-btnR" ng-click="nextPage()" ng-disabled="page === totalPages">Next</button>
             </div>
         </div>
     </section>
 
     <div class="social-icons">
-        <a href="https://github.com/AmerFran/KELOMPOK-9-FRONTEND"> 
-            <i class ="bx bxl-github"></i>
-        </a>
-        <a href="https://www.instagram.com/fabliusm/"> 
-            <i class ="bx bxl-instagram-alt"></i>
-        </a>
-        <a href="https://x.com/"> 
-            <i class ="bx bxl-twitter"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/amer-f-337088308/"> 
-            <i class ="bx bxl-linkedin-square"></i>
+        <a ng-href="{{social.github}}" ng-repeat="social in socialLinks"> 
+            <i class="bx" ng-class="social.icon"></i>
         </a>
     </div>
 
     <ul class="list"></ul>
-    <p class="copyright">
-        © Healthy Living | All Rights Reserved
-    </p>
+    <p class="copyright">{{copyright}}</p>
 </body>

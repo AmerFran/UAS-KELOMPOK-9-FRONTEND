@@ -200,10 +200,13 @@ html::-webkit-scrollbar-thumb {
 }
 
 .cart-total {
-    font-size: 1.2rem;
     margin-top: 20px;
     font-weight: bold;
     color: #333;
+}
+
+.cart-total .total-price{
+    font-size: 15px;
 }
 
 /* Submit button styling */
@@ -239,6 +242,10 @@ html::-webkit-scrollbar-thumb {
     margin-top: 30px;
 }
 
+.pagination .pagination-info {
+    font-size: 15px;
+}
+
 .pagination button {
     padding: 8px 15px;
     background-color: #333;
@@ -260,17 +267,8 @@ html::-webkit-scrollbar-thumb {
 }
 
 /* Custom button styling for call-to-action */
-.cta-btn {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 1rem 3rem;
-    border: .1rem solid var(--main-color);
-    border-radius: .5rem;
-    cursor: pointer;
-    font-size: 1rem;
-    color: var(--white);
-    background: var(--main-color);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+.cart-container .cta-btn{
+    font-size: 15px;
 }
 
 .cta-btn:hover {
@@ -280,7 +278,11 @@ html::-webkit-scrollbar-thumb {
 }
 
 /* Title and subtitle styling */
-.shop-title,
+.shop-title{
+    font-size: 35px;
+    font-family: 'Doto', sans-serif;
+}
+
 .shop-subtitle {
     padding: 20px;
     font-size: 25px;
@@ -328,6 +330,10 @@ html::-webkit-scrollbar-thumb {
     color: #333;
 }
 
+.cart-title{
+    font-size: 15px;
+}
+
 /* Styling for the decrease button */
 .decrease-btn {
     padding: 5px 10px;
@@ -368,4 +374,11 @@ html::-webkit-scrollbar-thumb {
     background-color: #388e3c;
     transform: translateY(0);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-input{
+    background-color: #c8d3c8;
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
 }

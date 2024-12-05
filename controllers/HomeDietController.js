@@ -106,4 +106,25 @@ app.controller('HomeDietController', function($scope, $http) {
             }
         }
     };
+
+    $scope.socialLinks = [
+        {
+            url: "https://github.com/AmerFran/KELOMPOK-9-FRONTEND",
+            icon: "bxl-github"
+        },
+        {
+            url: "https://www.instagram.com/fabliusm/",
+            icon: "bxl-instagram-alt"
+        },
+        {
+            url: "https://x.com/",
+            icon: "bxl-twitter"
+        },
+        {
+            url: "https://www.linkedin.com/in/amer-f-337088308/",
+            icon: "bxl-linkedin-square"
+        }
+    ];
+
+    $scope.copyright = "© Healthy Living | All Rights Reserved";
 });
