@@ -30,6 +30,12 @@ app.controller('ShopController', function($scope, $location, ShopService, AuthSe
             });
     };
 
+    //resets page to 1 when filtering food
+    $scope.filterFoods = function() {
+        $scope.page=1;
+        this.getFoodItems();
+    };
+
     // Load food items on page load
     $scope.getFoodItems();
 
