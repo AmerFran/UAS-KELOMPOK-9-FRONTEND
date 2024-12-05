@@ -1,30 +1,45 @@
-<body ng-controller="ReceiptController">
+<head>
+    <link rel="stylesheet" href="../css/receipt.css">
+</head>
+<header class="header">
+    <a href="#" class="logo">
+        <img src="../assets/image/logo.jpg" alt="Healthy Living Logo" class="logo-img">
+        Healthy Living
+    </a>
+    <div id="menu" ng-click="toggleMenu()">&#x1F354;</div>
+    <div ng-include="'navbar.html'"></div>
+</header>
 
-    <h1>Receipt for {{user.username}}</h1>
-    
-    <!-- Check if transactions are available -->
-    <div ng-if="transactions.length === 0">
-        <p>No pending transactions found.</p>
-    </div>
+<body ng-controller="ReceiptController" class="receipt-page">
+    <div class="receipt-container">
+        <h1>Receipt for {{user.username}}</h1>
 
-    <div ng-if="transactions.length > 0">
-        <div ng-repeat="transaction in transactions">
-            <h2>Transaction ID: {{transaction.id}}</h2>
-            <p>Checkout Date: {{transaction.checkout_date | date:'MMMM d, yyyy h:mm a'}}</p>
-            <p>Total Price: {{transaction.total_price | currency}}</p>
+        <!-- Message when no transactions -->
+        <div ng-if="transactions.length === 0">
+            <p>No pending transactions found.</p>
+        </div>
 
-            <h3>Items:</h3>
-            <ul>
-                <li ng-repeat="item in transaction.items">
-                    Food Name: {{item.food_name}}, Quantity: {{item.quantity}}
-                </li>
-            </ul>
+        <!-- Transactions -->
+        <div ng-if="transactions.length > 0">
+            <div ng-repeat="transaction in transactions" class="transaction-container">
+                <h2>Transaction ID: {{transaction.id}}</h2>
+                <p>Checkout Date: {{transaction.checkout_date | date:'MMMM d, yyyy h:mm a'}}</p>
+                <p>Total Price: {{transaction.total_price | currency}}</p>
 
-            
-            <button ng-click="updatePickupDate(transaction.id)">Pickup</button>
-            <!-- address randomly generated from: https://www.fakepersongenerator.com/Random/generate_address -->
-            <h3>Don't forget to pick up your food at 182 Whitetail Lane Dallas, Texas 75201 in around {{transaction.predictedTime | date:'h:mm a'}} and enjoy!</h3>
+                <h3>Items:</h3>
+                <ul>
+                    <li ng-repeat="item in transaction.items">
+                        Food Name: {{item.food_name}}, Quantity: {{item.quantity}}
+                    </li>
+                </ul>
+
+                <button ng-click="updatePickupDate(transaction.id)">Pickup</button>
+                <h3>
+                    Don't forget to pick up your food at 182 Whitetail Lane, Dallas, Texas 75201, in around
+                    {{transaction.predictedTime | date:'h:mm a'}} and enjoy!
+                </h3>
+            </div>
         </div>
     </div>
-
 </body>
+
