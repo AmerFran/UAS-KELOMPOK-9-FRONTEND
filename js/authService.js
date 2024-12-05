@@ -15,6 +15,19 @@ app.factory('AuthService', function($window,$http) {
     //gets user detail
     service.getUser = function () {
         const user = JSON.parse($window.localStorage.getItem('user'));
+        //checks if user still exists in the database
+        $http.get(API_URL + `/users/${user.id}`)
+            .then(function() {
+            })
+            .catch(function(error) {
+                //404 is the error code for not found
+                if (error.status === 404) {
+                    //logs the user out if they're not found
+                    service.logout();  
+                } else {
+                    console.error('Error getting user', error);
+                }
+            });
         return user || {};
     };
 
