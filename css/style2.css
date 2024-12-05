@@ -6,19 +6,19 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    line-height: 1.8;
 }
 
 .full-width-banner {
     width: 100%;
     background-color: #f6e3ba;
-    padding: 35px 0;
+    padding: 40px 0;
     text-align: center;
     color: #333;
 }
 
 .full-width-banner h1 {
-    font-size: 3em;
+    font-size: 45px; 
     font-weight: bold;
     margin: 0;
     letter-spacing: 2px;
@@ -32,30 +32,30 @@ body {
 
 #descriptionContainer, #ingredientsContainer, #instructionContainer {
     background-color: #f6e3ba;
-    padding: 25px;
-    margin-bottom: 20px;
+    padding: 35px;
+    margin-bottom: 30px;
     border-radius: 8px;
     border: 2px solid #fbd886;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     line-height: 1.8;
-    font-size: 1.1em;
 }
 
 #descriptionContainer h2, #ingredientsContainer h2, #instructionContainer h2 {
-    font-size: 1.6em;
+    font-size: 30px;
     color: #555;
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+
 }
 
 a {
     display: inline-block;
     background-color: #f3d38f;
     color: black;
-    padding: 12px 25px;
+    padding: 15px 30px;
     text-decoration: none;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     transition: background-color 0.3s;
 }
 
@@ -71,15 +71,15 @@ a:hover {
 }
 
 ul, ol {
-    list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
 li {
-    padding: 10px 0;
+    padding: 12px 0;
     border-bottom: 1px solid #ddd;
     color: #555;
+    font-size: 15px; /* Ukuran font yang lebih besar untuk list item */
 }
 
 li:last-child {
@@ -99,9 +99,17 @@ li:last-child {
     margin-left: -1em; 
 }
 
+.ingredients-btn {
+    font-size: 15px; /* Ukuran font lebih besar pada tombol */
+}
+
+.description {
+    font-size: 15px; /* Ukuran font lebih besar pada deskripsi */
+}
+
 @media (max-width: 768px) {
     .full-width-banner h1 {
-        font-size: 2.5em;
+        font-size: 3em;
     }
 
     .container {
@@ -109,28 +117,28 @@ li:last-child {
     }
 
     #descriptionContainer, #ingredientsContainer, #instructionContainer {
-        padding: 0px;
+        padding: 30px;
     }
 
     #descriptionContainer h2, #ingredientsContainer h2, #instructionContainer h2 {
-        font-size: 1.4em;
+        font-size: 1.8em;
     }
 
     a {
-        padding: 10px 20px;
+        padding: 15px 25px;
     }
 }
 
 @media (max-width: 480px) {
     .full-width-banner h1 {
-        font-size: 2em; 
+        font-size: 2.5em; 
     }
 
     #descriptionContainer, #ingredientsContainer, #instructionContainer {
-        padding: 10px; 
+        padding: 15px; 
     }
 
     #descriptionContainer h2, #ingredientsContainer h2, #instructionContainer h2 {
-        font-size: 1.2em;
+        font-size: 1.5em;
     }
 }

@@ -243,7 +243,7 @@ section {
 }
 
 .search-btn:hover,.diet-btnL:hover,.diet-btnR:hover {
-    background-color:rgb(53, 199, 48);
+    background-color: var(--main-color);
 }
 
 /* Service Section */
@@ -469,7 +469,7 @@ section {
 }
 
 .diet {
-    margin-top: 5rem;
+    margin-top: 1rem;
 }
 
 .diet .heading {
@@ -577,6 +577,15 @@ section {
     font-size: 15px;
 }
 
+.category-name{
+    font-size: 25px;
+}
+
+.filter .heading{
+    font-size: 50px;
+    margin-top: 5rem;
+}
+
 .social-icons {
     display: flex;
     justify-content: center;
@@ -594,6 +603,7 @@ section {
     font-size: 2rem;
     color: var(--light-black);
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .logo {
@@ -827,9 +837,7 @@ section {
 .delete-btn:hover {
     background-color: #e53935; /* Darker red for hover */
 }
-.bomber{
-    font-size: 25px;
-}
+
 /* Container for the form */
 .form-container {
     background: #fff;
@@ -870,7 +878,7 @@ section {
 .submit-button {
     width: 100%;
     padding: 14px;
-    background-color: #4CAF50;
+    background-color: var(--main-color);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -980,17 +988,13 @@ section {
 }
 
 .submit-btn {
-    background: #0964c5;
+    background: var(--main-color);
     color: #ebe8e8;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-}
-
-.submit-btn:disabled {
-    background: #0f5f1e;
 }
 
 .submit-btn:hover {
