@@ -1,47 +1,38 @@
-<style>
-    /*placeholder for smaller image*/
-    .food-image {
-        width: 100px;
-        height: auto;
-    }
-</style>
-<body ng-controller="FoodController">
-    <div>
-        <h2>My Foods</h2>
-        <a href="#!/createFood">createFood</a>
+<body class="userFoods-page" ng-controller="FoodController">
+    <div class="userFoods-container">
+        <h2 class="userFoods-title">My Foods</h2>
+        <a href="#!/createFood" class="userFoods-create">Create Food</a>
 
         <!-- Search and filter form -->
-        <div>
-            <input type="text" ng-model="searchName" placeholder="Search by name">
-            <select ng-model="selectedCategory">
-                <option value="">none</option>
+        <div class="userFoods-search">
+            <input type="text" class="userFoods-search-input" ng-model="searchName" placeholder="Search by name">
+            <select class="userFoods-search-select" ng-model="selectedCategory">
+                <option value="">None</option>
                 <option value="Breakfast">Breakfast</option>
                 <option value="Vegan">Vegan</option>
                 <option value="Side">Side</option>
                 <option value="Seafood">Seafood</option>
             </select>
-            <!-- Submit button to trigger search -->
-            <button ng-click="searchFoods()">Search</button>
+            <button class="userFoods-search-button" ng-click="searchFoods()">Search</button>
         </div>
 
         <!-- Food items list -->
-        <div ng-repeat="food in foods">
-            <div>
-                <h3>{{ food.name }}</h3>
-                <img ng-src="{{ food.imagelink }}" alt="{{ food.name }}" class="food-image">
-                <p>Category: {{ food.category }}</p>
-                <p>Price: ${{ food.price }}</p>
-                <a href="#!/editFood/{{food.id}}">Edit</a>
-                <button ng-click="deleteFood(food.id)">Delete</button>
+        <div class="userFoods-list" ng-repeat="food in foods">
+            <div class="userFoods-item">
+                <h3 class="userFoods-item-title">{{ food.name }}</h3>
+                <img ng-src="{{ food.imagelink }}" alt="{{ food.name }}" class="userFoods-item-image">
+                <p class="userFoods-item-category">Category: {{ food.category }}</p>
+                <p class="userFoods-item-price">Price: ${{ food.price }}</p>
+                <a href="#!/editFood/{{food.id}}" class="userFoods-item-edit">Edit</a>
+                <button class="userFoods-item-delete" ng-click="deleteFood(food.id)">Delete</button>
             </div>
         </div>
 
         <!-- Pagination Controls -->
-        <div>
-            <button ng-disabled="currentPage <= 1" ng-click="changePage(currentPage - 1)">Previous</button>
-            <span>Page {{currentPage}} of {{totalPages}}</span>
-            <button ng-disabled="currentPage >= totalPages" ng-click="changePage(currentPage + 1)">Next</button>
+        <div class="userFoods-pagination">
+            <button class="userFoods-pagination-prev" ng-disabled="currentPage <= 1" ng-click="changePage(currentPage - 1)">Previous</button>
+            <span class="userFoods-pagination-info">Page {{currentPage}} of {{totalPages}}</span>
+            <button class="userFoods-pagination-next" ng-disabled="currentPage >= totalPages" ng-click="changePage(currentPage + 1)">Next</button>
         </div>
     </div>
 </body>
-
