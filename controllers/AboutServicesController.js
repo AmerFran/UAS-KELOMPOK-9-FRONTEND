@@ -67,7 +67,7 @@ app.controller('AboutServicesController', function($scope) {
     // Social media links
     $scope.socialLinks = [
         {
-            url: "https://github.com/AmerFran/KELOMPOK-9-FRONTEND",
+            url: "https://github.com/AmerFran/UAS-KELOMPOK-9-FRONTEND",
             icon: "bxl-github"
         },
         {
@@ -75,7 +75,7 @@ app.controller('AboutServicesController', function($scope) {
             icon: "bxl-instagram-alt"
         },
         {
-            url: "https://x.com/",
+            url: "https://x.com/cakequitterie",
             icon: "bxl-twitter"
         },
         {
@@ -85,14 +85,4 @@ app.controller('AboutServicesController', function($scope) {
     ];
 
     $scope.copyright = "© Healthy Living | All Rights Reserved";
-
-    // Menu toggle function
-    $scope.toggleMenu = function() {
-        // Add your menu toggle logic here
-    };
-
-    // Search function
-    $scope.search = function() {
-        // Add your search logic here using $scope.searchText
-    };
 });
