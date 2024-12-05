@@ -1,18 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="PaymentApp">
+<head>
+    <link rel="stylesheet" href="../css/payment.css">
+</head>
 <body ng-controller="PaymentController">
-    <div>
-        <h2>Credit Card Payment</h2>
-        <h2>total price: {{result.total_price}}</h2>
-        <form ng-submit="processPayment()" name="paymentForm" novalidate>
-            <div>
-                <label for="cardNumber">Card Number:</label>
-                <input type="text" id="cardNumber" ng-model="payment.cardNumber" required />
-                <button type="submit" ng-disabled="paymentForm.$invalid">pay</button>
-            </div>
-            
-        </form>
+    <div class="payment-container">
+        <div class="payment-card">
+            <h1 class="visa-logo">VISA</h1>
+            <form name="paymentForm" ng-submit="processPayment()" novalidate>
+                <!-- Card Number -->
+                <div class="form-group">
+                    <label for="cardNumber">CARD NUMBER</label>
+                    <input type="text" id="cardNumber" ng-model="payment.cardNumber" placeholder="7419 9412 5910 9218" required>
+                </div>
+
+                <!-- Card Holder Name -->
+                <div class="form-group">
+                    <label for="cardHolder">CARD HOLDER NAME</label>
+                    <input type="text" id="cardHolder" ng-model="payment.cardHolderName" placeholder="Joshua Hernandez" required>
+                </div>
+                
+                <!-- Expiration Date -->
+                <div class="form-group">
+                    <label>EXPIRATION DATE</label>
+                    <div class="form-row">
+                        <select ng-model="payment.expMonth" required>
+                            <option value="" disabled selected>Month</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select ng-model="payment.expYear" required>
+                            <option value="" disabled selected>Year</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" ng-disabled="paymentForm.$invalid">
+                    COMPLETE ORDER
+                </button>
+            </form>
+        </div>
     </div>
 
-    
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
