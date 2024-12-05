@@ -1,38 +1,40 @@
-<section>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h3>Welcome, {{ user.username }}!</h3>
-    <form ng-submit="change(user)" name="validator0" novalidate>
-        <h3>change email and username</h3>
-        <input type="text" ng-model="change.username" placeholder="Username" required>
-        <input type="email" ng-model="change.email" placeholder="Email" required>
-        <input type="password" ng-model="change.password" placeholder="Password" required>
-        <button type="submit" ng-disabled="validator0.$invalid">change</button>
-    </form>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <form ng-submit="changePass(user)" name="validator1" novalidate>
-        <h3>change password</h3>
-        <input type="password" ng-model="change.currPass" placeholder="current password" required>
-        <input type="password" ng-model="change.newPass" placeholder="new password" required>
-        <input type="password" ng-model="change.confirmPass" placeholder="confirm password" required>
-        <button type="submit" ng-disabled="validator1.$invalid">change</button>
-    </form>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1 ng-click="logOut()">logout</h1>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Elemen pembungkus -->
+    
+    <div class="profile-page">
+        <section class="profile-section">
+            <div class="welcome-message">
+                <h3>Welcome, {{ user.username }}!</h3>
+            </div>
+            <div class="profile-icon-container">
+                <img src="../assets/image/user.png" alt="User Icon" class="profile-icon">
+            </div>
 
-    <button ng-click="deleteAccount(user)">Delete Account</button>
-</section>
+            <form ng-submit="change(user)" name="validator0" novalidate class="form-container">
+                <h3 class="form-title">Change Email and Username</h3>
+                <input type="text" ng-model="change.username" placeholder="Username" required class="input-field">
+                <input type="email" ng-model="change.email" placeholder="Email" required class="input-field">
+                <input type="password" ng-model="change.password" placeholder="Password" required class="input-field">
+                <button type="submit" ng-disabled="validator0.$invalid" class="submit-btn">Change</button>
+            </form>
+
+            <form ng-submit="changePass(user)" name="validator1" novalidate class="form-container">
+                <h3 class="form-title">Change Password</h3>
+                <input type="password" ng-model="change.currPass" placeholder="Current Password" required class="input-field">
+                <input type="password" ng-model="change.newPass" placeholder="New Password" required class="input-field">
+                <input type="password" ng-model="change.confirmPass" placeholder="Confirm Password" required class="input-field">
+                <button type="submit" ng-disabled="validator1.$invalid" class="submit-btn">Change</button>
+            </form>
+
+            <div class="logout-container">
+                <h1 ng-click="logOut()" class="logout-btn">Logout</h1>
+                <button ng-click="deleteAccount(user)" class="delete-btn">Delete Account</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+
