@@ -1159,7 +1159,8 @@ section {
 .login-page {
     font-family: Arial, sans-serif;
     padding: 20px;
-    background-image: url('../assets/image/loginimg.avif');
+    background: url('../assets/image/login.jpg') no-repeat center center;
+    background-size: cover; 
     display: flex;
     justify-content: center;
     align-items: center;
