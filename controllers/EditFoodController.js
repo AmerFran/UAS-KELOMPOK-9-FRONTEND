@@ -1,4 +1,4 @@
-app.controller('EditFoodController', ['$scope', '$http', '$routeParams', 'AuthService', function($scope, $http, $routeParams, AuthService) {
+app.controller('EditFoodController', ['$scope','$location', '$routeParams', 'AuthService', 'EditFoodService', function($scope,$location, $routeParams, AuthService, EditFoodService) {
     const API = "http://localhost:3000";
 
     // Get user data
@@ -38,8 +38,8 @@ app.controller('EditFoodController', ['$scope', '$http', '$routeParams', 'AuthSe
     // Fetch the food data for editing based on the foodId in the URL
     const foodId = $routeParams.foodId;
 
-    // Fetch food item from the api
-    $http.get(API + '/foods/' + foodId)
+    // Fetch food item from the service
+    EditFoodService.getFood(foodId)
         .then(function(response) {
             const foodData = response.data;
 
@@ -61,10 +61,10 @@ app.controller('EditFoodController', ['$scope', '$http', '$routeParams', 'AuthSe
     // Function to update food
     $scope.updateFood = function() {
         if ($scope.foodForm.$valid) {
-            $http.put(API + '/foods/' + foodId, $scope.food)
+            EditFoodService.updateFood(foodId, $scope.food)
                 .then(function(response) {
                     alert('Food updated successfully!');
-                    $scope.food = {}; // Reset the form
+                    $location.path('/userFoods');
                 })
                 .catch(function(error) {
                     alert('Error updating food. Please try again.');
@@ -75,3 +75,4 @@ app.controller('EditFoodController', ['$scope', '$http', '$routeParams', 'AuthSe
         }
     };
 }]);
+    

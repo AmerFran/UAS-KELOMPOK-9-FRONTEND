@@ -1,4 +1,5 @@
-app.controller('FoodController', function($scope, $http, $window, AuthService) {
+// food.controller.js
+app.controller('FoodController', function($scope, FoodService, $window, AuthService) {
     const API = 'http://localhost:3000';
     
     // Get the current user details
@@ -23,7 +24,7 @@ app.controller('FoodController', function($scope, $http, $window, AuthService) {
         };
 
         // Send the request with the search and filter params
-        $http.get(API + '/foods', { params: params })
+        FoodService.getFoods(params)
             .then(function(response) {
                 $scope.foods = response.data.data; // The foods array
                 $scope.totalPages = response.data.pagination.totalPages; // Total pages
@@ -53,7 +54,7 @@ app.controller('FoodController', function($scope, $http, $window, AuthService) {
     // Delete food item
     $scope.deleteFood = function(foodId) {
         if (confirm('Are you sure you want to delete this food item?')) {
-            $http.delete(API + '/foods/' + foodId)
+            FoodService.deleteFood(foodId)
                 .then(function(response) {
                     alert('Food item deleted successfully');
                     $scope.getFoods(); // Refresh the food list after deletion

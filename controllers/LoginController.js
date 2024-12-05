@@ -1,4 +1,4 @@
-app.controller('LoginController', ['$scope', '$http', '$window', '$location','AuthService', function ($scope, $http, $window, $location,AuthService) {
+app.controller('LoginController', ['$scope', '$http', '$window', '$location', 'LoginService', function ($scope, $http, $window, $location, LoginService) {
     const API_URL = 'http://localhost:3000';
     $scope.loginData = {
         email: '',
@@ -15,12 +15,12 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$location','Au
 
     //checks if the user is authenticated
     $scope.isAuthenticated = function () {
-        return (AuthService.isAuthenticated());
+        return LoginService.isAuthenticated();
     };
 
-    $scope.getUser=function(){
-        return(AuthService.getUser());
-    }
+    $scope.getUser = function () {
+        return LoginService.getUser();
+    };
 
     //logs the user
     $scope.login = function () {
@@ -30,7 +30,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$location','Au
         };
 
         //checks if credentials are correct
-        $http.post(API_URL + '/login', data)
+        LoginService.login(data)
             .then(function (response) {
                 $window.localStorage.setItem('authToken', response.data.token);
                 $window.localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -50,7 +50,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$location','Au
             password: $scope.registerData.password
         };
 
-        $http.post(API_URL + '/users', data)
+        LoginService.register(data)
             .then(function (response) {
                 alert('Registration successful! You can now log in.');
                 $scope.showRegisterForm = false;
@@ -75,7 +75,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$location','Au
 
     //redirects the user to the homepage if theyre logged in
     if ($scope.isAuthenticated()) {
-        $location.path('/home'); 
+        $location.path('/home');
     }
 
 }]);

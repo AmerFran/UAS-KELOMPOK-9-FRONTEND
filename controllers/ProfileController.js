@@ -1,27 +1,25 @@
-app.controller('ProfileController', ['$scope', '$http', '$window', '$location','AuthService', function ($scope, $http, $window, $location,AuthService) {
-    const API_URL = 'http://localhost:3000';
-    
-    //gets user information(name,email,id,etc)
-    $scope.getUser=function(){
-        return(AuthService.getUser());
-    }
+// ProfileController.js
+app.controller('ProfileController', ['$scope', '$window', '$location', 'AuthService', 'ProfileService', function ($scope, $window, $location, AuthService, ProfileService) {
+    // Gets user information(name, email, id, etc)
+    $scope.getUser = function() {
+        return ProfileService.getUser();
+    };
 
-    //handles username and email change
-    $scope.change = function (currUser) {
-        const data={
-            username:$scope.change.username,
-            email:$scope.change.email,
+    // Handles username and email change
+    $scope.change = function(currUser) {
+        const data = {
+            username: $scope.change.username,
+            email: $scope.change.email,
             password: $scope.change.password
-        }
+        };
 
-        //checks if credentials are correct
-        $http.put(API_URL + `/users/${currUser.id}`, data)
-            .then(function (response) {
+        // Checks if credentials are correct
+        ProfileService.change(currUser, data)
+            .then(function(response) {
                 AuthService.refreshAuth();
-                alert("sucessfully changed");
-
+                alert("Successfully changed");
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 if (error.data && error.data.error) {
                     alert(error.data.error); // Display the raw error message returned from the API
                 } else {
@@ -30,43 +28,41 @@ app.controller('ProfileController', ['$scope', '$http', '$window', '$location','
             });
     };
 
-    //handles password change
-    $scope.changePass = function (currUser) {
-        if($scope.change.newPass!=$scope.change.confirmPass){
-            alert("new password and confirm password dont match")
-        }else{
-            const data={
-                newpass:String($scope.change.newPass),
-                oldpass:String($scope.change.currPass)
-            }
-            
-    
-            //checks if credentials are correct
-            $http.put(API_URL + `/users/changepass/${currUser.id}`, data)
-                .then(function (response) {
-                    alert("sucessfully changed");
-    
+    // Handles password change
+    $scope.changePass = function(currUser) {
+        if ($scope.change.newPass !== $scope.change.confirmPass) {
+            alert("New password and confirm password don't match");
+        } else {
+            const data = {
+                newPass: String($scope.change.newPass),
+                currPass: String($scope.change.currPass)
+            };
+
+            // Checks if credentials are correct
+            ProfileService.changePass(currUser, data)
+                .then(function(response) {
+                    alert("Successfully changed");
                 })
-                .catch(function (error) {
-                    alert("incorrect password");
+                .catch(function(error) {
+                    alert("Incorrect password");
                 });
         }
     };
-    
-    //passes variable to html
+
+    // Passes variable to HTML
     $scope.user = $scope.getUser();
 
-    //logs the user out and redirects them to the login page
+    // Logs the user out and redirects them to the login page
     $scope.logOut = function() {
         AuthService.logout();
         $location.path('/');
     };
 
-    //delete
+    // Delete account
     $scope.deleteAccount = function(currUser) {
         const confirmation = confirm("Are you sure you want to delete your account? This action cannot be undone.");
         if (confirmation) {
-            $http.delete(API_URL + `/users/${currUser.id}`)
+            ProfileService.deleteAccount(currUser)
                 .then(function(response) {
                     alert("Your account has been deleted successfully.");
                     AuthService.logout();
@@ -77,7 +73,4 @@ app.controller('ProfileController', ['$scope', '$http', '$window', '$location','
                 });
         }
     };
-
-
 }]);
-

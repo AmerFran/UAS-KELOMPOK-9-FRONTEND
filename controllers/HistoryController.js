@@ -1,9 +1,7 @@
-app.controller('HistoryController', ['$scope', '$http', 'AuthService', function($scope, $http, AuthService) {
-    const API = 'http://localhost:3000';
-
+app.controller('HistoryController', ['$scope', 'HistoryService', function($scope, HistoryService) {
     // Get current user details
     $scope.getUser = function() {
-        return AuthService.getUser();
+        return HistoryService.getUser();
     };
 
     $scope.user = $scope.getUser(); // Get the currently logged-in user
@@ -12,64 +10,26 @@ app.controller('HistoryController', ['$scope', '$http', 'AuthService', function(
     $scope.fetchTransactions = function() {
         var userId = $scope.user.id;
 
-        // Call the API to fetch transactions
-        $http.get(API + '/transactions/user/' + userId)
-            .then(function(response) {
-                // Ensure the transactions array exists before processing
-                if (response.data && Array.isArray(response.data.transactions)) {
-                    // Filter transactions that have a pickup_date
-                    $scope.transactions = response.data.transactions.filter(function(transaction) {
-                        return transaction.pickup_date != null;
-                    });
-
-                    // Now fetch the food names for each transaction
-                    $scope.fetchFoodDetails($scope.transactions);
-                } else {
-                    console.error("No transactions or invalid format received");
-                    $scope.transactions = [];
-                }
+        // Call the service to fetch transactions
+        HistoryService.fetchTransactions(userId)
+            .then(function(transactions) {
+                // Assign the fetched transactions to the scope
+                $scope.transactions = transactions;
             })
             .catch(function(error) {
-                console.error("Error fetching transactions:", error);
                 $scope.transactions = [];
             });
-    };
-
-    // Fetch food details for each transaction
-    $scope.fetchFoodDetails = function(transactions) {
-        if (Array.isArray(transactions)) {
-            //checks every transaction
-            transactions.forEach(function(transaction) {
-                //fetches food name
-                if (transaction.items && Array.isArray(transaction.items)) {
-                    transaction.items.forEach(function(item) {
-                        //fetches food name via its id using the api
-                        $http.get(API + '/foods/' + item.food_id)
-                            .then(function(response) {
-                                // Assign the food name to the item
-                                item.food_name = response.data.name;
-                            })
-                            .catch(function(error) {
-                                console.error("Error fetching food details:", error);
-                                item.food_name = 'Unknown'; // Default in case of an error
-                            });
-                    });
-                }
-            });
-        } else {
-            console.error("Invalid transactions format in fetchFoodDetails");
-        }
     };
 
     // Function to delete a transaction
     $scope.deleteTransaction = function(transactionId) {
         // Confirm deletion with the user
         if (confirm('Are you sure you want to delete this transaction?')) {
-            $http.delete(API + '/transactions/' + transactionId)
-                .then(function(response) {
-                    //removes deleted item from the html
+            HistoryService.deleteTransaction(transactionId)
+                .then(function(deletedTransactionId) {
+                    // Removes deleted item from the HTML
                     $scope.transactions = $scope.transactions.filter(function(transaction) {
-                        return transaction.id !== transactionId;
+                        return transaction.id !== deletedTransactionId;
                     });
                 })
                 .catch(function(error) {
@@ -79,6 +39,5 @@ app.controller('HistoryController', ['$scope', '$http', 'AuthService', function(
         }
     };
 
-    $scope.fetchTransactions();
-
+    $scope.fetchTransactions(); // Initial fetch of transactions
 }]);

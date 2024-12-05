@@ -1,4 +1,4 @@
-app.controller('ShopController', function($scope, $location, $http, AuthService) {
+app.controller('ShopController', function($scope, $location, ShopService, AuthService) {
     $scope.foodItems = [];
     $scope.cart = [];
     $scope.page = 1;
@@ -10,37 +10,24 @@ app.controller('ShopController', function($scope, $location, $http, AuthService)
     $scope.searchName = '';
     $scope.selectedCategory = '';
 
-    const API = 'http://localhost:3000';
-
-    // Gets user information (id, user, etc.)
+    // Fetch user information using the service
     $scope.getUser = function() {
-        return AuthService.getUser();
+        return ShopService.getUser(AuthService);
     };
 
-    // Passes variable to HTML
+    // Pass user information to the view
     $scope.user = $scope.getUser();
 
     // Fetch food items with pagination, search, and filtering
     $scope.getFoodItems = function() {
-        $http.get(API + '/foods', {
-            params: {
-                n: $scope.searchName,
-                c: $scope.selectedCategory,
-                page: $scope.page,
-                limit: $scope.limit
-            }
-        }).then(function(response) {
-            // Set default quantity to 1
-            $scope.foodItems = response.data.data.map(function(food) {
-                food.quantity = 1;
-                return food;
+        ShopService.getFoodItems($scope.page, $scope.limit, $scope.searchName, $scope.selectedCategory)
+            .then(function(result) {
+                $scope.foodItems = result.foodItems;
+                $scope.totalItems = result.totalItems;
+                $scope.totalPages = result.totalPages;
+            }, function(error) {
+                console.error('Error fetching food items:', error);
             });
-
-            $scope.totalItems = response.data.pagination.totalItems;
-            $scope.totalPages = response.data.pagination.totalPages;
-        }, function(error) {
-            console.error('Error fetching food items:', error);
-        });
     };
 
     // Load food items on page load
@@ -99,39 +86,14 @@ app.controller('ShopController', function($scope, $location, $http, AuthService)
 
         const total_price = parseFloat($scope.calculateTotal());
 
-        // Check if the user already has a cart
-        $http.get(API + '/carts/user/' + userId)
+        // Use the service to check and update the cart
+        ShopService.checkAndUpdateCart(userId, items, total_price)
             .then(function(response) {
-                if (response.data && response.data.cart) {
-                    const cartId = response.data.cart.id;
-
-                    // Update the existing cart
-                    $http.put(API + '/carts/' + cartId, {
-                        user_id: userId,
-                        items: items,
-                        total_price: total_price
-                    }).then(function(response) {
-                        $location.path('/payment');
-                        $scope.cart = [];  // Clear cart after submission
-                    }, function(error) {
-                        alert('Error updating cart.');
-                        console.error(error);
-                    });
-                } else {
-                    // Create a new cart
-                    $http.post(API + '/carts', {
-                        user_id: userId,
-                        items: items,
-                        total_price: total_price
-                    }).then(function(response) {
-                        $location.path('/payment');
-                        $scope.cart = []; // Clear cart after submission
-                    }, function(error) {
-                        alert('Error creating cart.');
-                    });
-                }
+                $location.path('/payment');
+                $scope.cart = [];  // Clear cart after submission
             }, function(error) {
-                alert('Error checking if cart exists.');
+                alert(error);
+                console.error(error);
             });
     };
 

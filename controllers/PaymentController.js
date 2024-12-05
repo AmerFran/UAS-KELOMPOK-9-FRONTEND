@@ -1,23 +1,22 @@
-app.controller('PaymentController', ['$scope', '$http', '$window', '$location','AuthService', function ($scope, $http, $window, $location,AuthService)  {
-    const API='http://localhost:3000'
+app.controller('PaymentController', ['$scope', '$window', '$location', 'AuthService', 'PaymentService', function ($scope, $window, $location, AuthService, PaymentService)  {
+    const API = 'http://localhost:3000';
     
     $scope.payment = {
         cardNumber: ''
     };
 
     //gets user information(name,email,id,etc)
-    $scope.getUser=function(){
-        return(AuthService.getUser());
+    $scope.getUser = function() {
+        return (AuthService.getUser());
     }
 
     //passes variable to html
     $scope.user = $scope.getUser();
 
-    // Make the API request
-    $http.get(API + `/carts/user/${$scope.user.id}`)
+    // Make the API request to get the user's cart
+    PaymentService.getCart($scope.user.id)
     .then(function(response) {
         var result = response.data;
-        
         $scope.result = result.cart;
     })
     .catch(function(error) {
@@ -28,7 +27,7 @@ app.controller('PaymentController', ['$scope', '$http', '$window', '$location','
     $scope.paymentStatus = '';
 
     // Process the payment
-    $scope.processPayment = function () {
+    $scope.processPayment = function() {
         // Prepare the receipt data
         const Data = {
             user_id: $scope.user.id,
@@ -36,11 +35,11 @@ app.controller('PaymentController', ['$scope', '$http', '$window', '$location','
             total_price: $scope.result.total_price,
             checkout_date: new Date().toISOString()
         };
-    
-        // creates a new transaction
-        $http.post(API+'/transactions', Data)
+
+        // Call the service to process the payment
+        PaymentService.processPayment(Data)
             .then(function(response) {
-                $location.path('/'); 
+                $location.path('/');
                 alert('Transaction completed successfully!');
             })
             .catch(function(error) {

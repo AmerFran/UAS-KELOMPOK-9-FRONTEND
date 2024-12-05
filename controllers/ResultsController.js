@@ -1,10 +1,9 @@
-app.controller('ResultsController', function($scope, $http, AuthService) {
+app.controller('ResultsController', function($scope, AuthService, ResultsService) {
     $scope.message = "Results and Success Stories";
     $scope.stories = [];
     $scope.userExperience = '';
     $scope.editedMessage = '';
     $scope.hasUserStory = false;
-    const API = 'http://localhost:3000';
 
     // Fetches current logged-in user
     $scope.getUser = function() {
@@ -16,11 +15,11 @@ app.controller('ResultsController', function($scope, $http, AuthService) {
 
     // Fetch all stories from the API
     $scope.loadStories = function() {
-        $http.get(API + '/messages')
+        ResultsService.loadStories()
             .then(function(response) {
                 $scope.stories = response.data.map(function(story) {
                     // Fetch the username based on the user_id (for other users)
-                    $http.get(API + '/users/' + story.user_id)
+                    ResultsService.getUserById(story.user_id)
                         .then(function(userResponse) {
                             // Set the title to the username's journey
                             story.title = `${userResponse.data.username}'s journey`;
@@ -54,7 +53,7 @@ app.controller('ResultsController', function($scope, $http, AuthService) {
                 message: $scope.userExperience
             };
 
-            $http.post(API + '/messages', experienceData)
+            ResultsService.submitExperience(experienceData)
                 .then(function(response) {
                     // Set the title to the logged-in user's journey
                     response.data.title = `${$scope.user.username}'s journey`;
@@ -78,7 +77,7 @@ app.controller('ResultsController', function($scope, $http, AuthService) {
                 message: $scope.editedMessage
             };
 
-            $http.put(API + '/messages/' + $scope.user.id, updatedData)
+            ResultsService.updateExperience($scope.user.id, updatedData)
                 .then(function(response) {
                     // Set the title to the logged-in user's journey
                     response.data.title = `${$scope.user.username}'s journey`;
@@ -102,11 +101,11 @@ app.controller('ResultsController', function($scope, $http, AuthService) {
 
     // Delete a story
     $scope.deleteStory = function(currId) {
-        $http.delete(API + '/messages/' + currId)
+        ResultsService.deleteStory(currId)
             .then(function(response) {
                 // Remove the deleted story from the list
                 $scope.stories = $scope.stories.filter(story => story.user_id !== $scope.user.id);
-                $scope.hasUserStory = false; //user no longer has a story
+                $scope.hasUserStory = false; // user no longer has a story
                 $scope.editedMessage = '';
             })
             .catch(function(error) {

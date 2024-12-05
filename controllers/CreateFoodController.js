@@ -1,9 +1,9 @@
-app.controller('CreateFoodController', ['$scope', '$http', 'AuthService', function($scope, $http, AuthService) {
-    const API="http://localhost:3000"
+app.controller('CreateFoodController', ['$scope','$location', 'CreateFoodService', function($scope,$location, CreateFoodService) {
+    const API = "http://localhost:3000";
 
     // Get user data
     $scope.getUser = function() {
-        return AuthService.getUser();
+        return CreateFoodService.getUser();
     };
     $scope.user = $scope.getUser();
 
@@ -37,10 +37,10 @@ app.controller('CreateFoodController', ['$scope', '$http', 'AuthService', functi
     // Function to create food
     $scope.createFood = function() {
         if ($scope.foodForm.$valid) {
-            $http.post(API+'/foods', $scope.food)
+            CreateFoodService.createFood($scope.food)
                 .then(function(response) {
                     $scope.successMessage = 'Food created successfully!';
-                    $scope.food = {}; // Reset the form
+                    $location.path('/userFoods')
                 })
                 .catch(function(error) {
                     $scope.errorMessage = 'Error creating food. Please try again.';
