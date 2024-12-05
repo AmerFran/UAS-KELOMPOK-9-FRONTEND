@@ -12,7 +12,7 @@
 }
 
 body.userFoods-page {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Playwrite', sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
@@ -146,15 +146,19 @@ body.userFoods-page {
 .userFoods-item-edit, 
 .userFoods-item-delete, 
 .userFoods-create, 
-.userFoods-search-button, 
-.userFoods-pagination-prev, 
-.userFoods-pagination-next {
+.userFoods-search-button {
     font-size: 1.2rem; 
     padding: 10px 20px; 
     border-radius: 8px; 
     border: none; 
     cursor: pointer; 
     transition: all 0.3s ease; /
+}
+
+.userFoods-pagination .userFoods-pagination-prev, 
+.userFoods-pagination .userFoods-pagination-next,
+.userFoods-pagination .userFoods-pagination-info {
+    font-size: 15px;
 }
 
 .userFoods-item-edit {
