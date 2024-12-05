@@ -1,33 +1,43 @@
+<head>
+    <link rel="stylesheet" href="../css/history.css">
+</head>
+
+<header class="header">
+    <a href="#" class="logo">
+        <img src="../assets/image/logo.jpg" alt="Healthy Living Logo" class="logo-img">
+        Healthy Living
+    </a>
+    <div id="menu" ng-click="toggleMenu()">&#x1F354;</div>
+    <div ng-include="'navbar.html'"></div>
+</header>
+
 <body ng-controller="HistoryController">
+    <div class="history-container">
+        <h1>History for {{user.username}}</h1>
 
-    <h1>Receipt for {{user.username}}</h1>
-    
-    <!-- Check if transactions are available -->
-    <div ng-if="transactions.length === 0">
-        <p>No pending transactions found.</p>
-    </div>
+        <!-- No Transactions -->
+        <div ng-if="transactions.length === 0" class="empty-transactions">
+            <p>No pending transactions found.</p>
+        </div>
 
-    <div ng-if="transactions.length > 0">
-        <div ng-repeat="transaction in transactions">
-            <h2>Transaction ID: {{transaction.id}}</h2>
-            <p>Pickup Date: {{transaction.pickup_date| date:'MMMM d, yyyy h:mm a'}}</p>
-            <p>Checkout Date: {{transaction.checkout_date | date:'MMMM d, yyyy h:mm a'}}</p>
-            <p>Total Price: {{transaction.total_price | currency}}</p>
+        <!-- Transaction List -->
+        <div ng-if="transactions.length > 0">
+            <div class="transaction-container" ng-repeat="transaction in transactions">
+                <h2>Transaction ID: {{transaction.id}}</h2>
+                <p>Checkout Date: {{transaction.checkout_date | date:'MMMM d, yyyy h:mm a'}}</p>
+                <p>Total Price: {{transaction.total_price | currency}}</p>
 
-            <h3>Items:</h3>
-            <ul>
-                <li ng-repeat="item in transaction.items">
-                    Food Name: {{item.food_name}}, Quantity: {{item.quantity}}
-                </li>
-            </ul>
+                <h3>Items:</h3>
+                <ul>
+                    <li ng-repeat="item in transaction.items">
+                        Food Name: {{item.food_name}}, Quantity: {{item.quantity}}
+                    </li>
+                </ul>
 
-            <button ng-click="deleteTransaction(transaction.id)" class="btn btn-danger">
-                Delete Transaction
-            </button>
+                <button ng-click="deleteTransaction(transaction.id)" class="btn btn-danger">
+                    Delete Transaction
+                </button>
+            </div>
         </div>
     </div>
-
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<script src="app.js"></script>
-</html>
