@@ -889,14 +889,14 @@ section {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url('../assets/image/diet1.jpg');
+    background-image: url('../assets/image/greenwallpp.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .profile-page .profile-section {
-    background: rgba(147, 135, 103, 0.8); 
+    background: rgba(241, 239, 233, 0.8); 
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 30px;
