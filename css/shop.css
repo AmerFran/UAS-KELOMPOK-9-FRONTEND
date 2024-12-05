@@ -334,6 +334,10 @@ html::-webkit-scrollbar-thumb {
     font-size: 15px;
 }
 
+.cart-list{
+    font-size: 15px;
+}
+
 /* Styling for the decrease button */
 .decrease-btn {
     padding: 5px 10px;
