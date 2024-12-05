@@ -86,12 +86,12 @@ app.config(function($routeProvider) {
             }
         })
         .when('/transactions', {
-            templateUrl: '/views/trnsactions.html',
+            templateUrl: '/views/transactions.html',
             controller: 'TransactionsController',
             resolve: {
                 auth: function(AuthService, $location) {
                     if (!AuthService.isAuthenticated()) {
-                        $location.path('/');
+                        $location.path('/');    
                     }
                 }
             }

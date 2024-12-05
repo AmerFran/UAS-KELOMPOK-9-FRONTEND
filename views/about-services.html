@@ -9,11 +9,11 @@
     </header>
 
     <section class="about-video">
-        <video id="background-video" autoplay loop muted>
+        <video id="background-video" autoplay loop>
             <source src="../assets/video/about.mp4" type="video/mp4">
         </video>
         <div class="content">
-            <h2>ABOUT US</h2>
+            <h2 >ABOUT US</h2>
         </div>
     </section>
     
@@ -38,7 +38,7 @@
                     <img ng-src="{{service.image}}" alt="{{service.title}}">
                 </div>
                 <div class="content">
-                    <h3>{{service.title}}</h3>
+                    <h3 class="services-font">{{service.title}}</h3>
                     <div class="line"></div>
                     <p>{{service.description}}</p>
                     <ul>
@@ -54,17 +54,17 @@
             <h1 class="heading">BMI Calculator</h1>
             <div class="calculator-container">
                 <form ng-submit="calculateBMI()">
-                    <label for="height">Height (cm):</label>
-                    <input type="number" id="height" ng-model="bmiData.height" required>
+                    <label class="height" for="height">Height (cm):</label>
+                    <input class="height" type="number" id="height" ng-model="bmiData.height" required>
                     
-                    <label for="weight">Weight (kg):</label>
-                    <input type="number" id="weight" ng-model="bmiData.weight" required>
+                    <label class="weight" for="weight">Weight (kg):</label>
+                    <input class="weight type="number" id="weight" ng-model="bmiData.weight" required>
                     
                     <button type="submit" class="calculate-btn">Calculate</button>
                 </form>
                 <div class="result" ng-if="bmiResult">
-                    <h3>Your BMI: {{bmiResult}}</h3>
-                    <p>{{bmiCategory}}</p>
+                    <h3 class="bmi-result">Your BMI: {{bmiResult}}</h3>
+                    <p class="bmi-result">{{bmiCategory}}</p>
                 </div>
             </div>
         </section>
