@@ -47,5 +47,5 @@ app.controller('PaymentController', ['$scope', '$window', '$location', 'AuthServ
                 console.error('Error processing payment:', error);
                 alert('There was an error processing your payment. Please try again.');
             });
-    };
+    };    
 }]);

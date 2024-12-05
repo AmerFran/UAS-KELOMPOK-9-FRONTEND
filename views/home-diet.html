@@ -11,7 +11,7 @@
     <section class="home" id="home">
         <div class="content">
             <h3>Discover Delicious and Nutritious Recipes for a Healthier You!</h3>
-            <a href="#!about-services" class="btn">read more</a>
+            <a href="#diet" class="btn">read more</a>
         </div>
     </section>
 
@@ -22,17 +22,19 @@
         </div>
     </section>
     
-    
     <section class="diet" id="diet">
         <h1 class="heading">diet plan</h1>
         <div class="container-diet">
             <ul class="controls">
                 <li ng-repeat="category in categories" ng-click="filterCategory(category.name)">
                     <img ng-src="{{category.image}}" alt="">
-                    <h3 class="bomber">{{category.name}}</h3>
+                    <h3 class="category-name">{{category.name}}</h3>
                 </li>
             </ul>
-            <h1 class="heading" id="result">{{filteredCategory}}</h1>
+            <div class="filter">
+                <h1 class="heading" id="result">{{filteredCategory}}</h1>
+            </div>
+            
             <div class="image-container" id="filterResult">
                 <div class="box" ng-repeat="meal in filteredMeals">
                     <div class="image">
@@ -58,7 +60,7 @@
     </section>
 
     <div class="social-icons">
-        <a ng-href="{{social.github}}" ng-repeat="social in socialLinks"> 
+        <a ng-href="{{social.url}}" ng-repeat="social in socialLinks"> 
             <i class="bx" ng-class="social.icon"></i>
         </a>
     </div>

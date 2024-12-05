@@ -65,7 +65,7 @@ app.controller('HomeDietController', function($scope, HomeDietService) {
 
     $scope.socialLinks = [
         {
-            url: "https://github.com/AmerFran/KELOMPOK-9-FRONTEND",
+            url: "https://github.com/AmerFran/UAS-KELOMPOK-9-FRONTEND",
             icon: "bxl-github"
         },
         {
@@ -73,7 +73,7 @@ app.controller('HomeDietController', function($scope, HomeDietService) {
             icon: "bxl-instagram-alt"
         },
         {
-            url: "https://x.com/",
+            url: "https://x.com/cakequitterie",
             icon: "bxl-twitter"
         },
         {
