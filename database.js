@@ -5,8 +5,8 @@ const {Pool}=pg
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'foodBase',
-  password: 'oreokuning',
+  database: 'foodbase',
+  password: '123456',
   port: 5432,
 });
 export default pool;
