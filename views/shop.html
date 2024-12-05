@@ -1,63 +1,74 @@
-<style>
-    /*placeholder for smaller image*/
-    .food-image {
-        width: 100px;
-        height: auto;
-    }
-</style>
-<body ng-controller="ShopController">
+<head><link rel="stylesheet" href="../css/shop.css"></head>
+    <header class="header">
+        <a href="#" class="logo">
+            <img src="../assets/image/logo.jpg" alt="Healthy Living Logo" class="logo-img">
+            Healthy Living
+        </a>
+        <div id="menu" ng-click="toggleMenu()">&#x1F354;</div>
+        <div ng-include="'navbar.html'"></div>
+    </header>
+    <body ng-controller="ShopController">
 
-    <h1>Food Shop</h1>
+    <div class="shop-container">
+        <h1 class="shop-title">Food Shop</h1>
 
-    <h3>Available Food Items</h3>
+        <h3 class="shop-subtitle">Available Food Items</h3>
 
-    <!-- Search and Filter Form -->
-    <div>
-        <input type="text" ng-model="searchName" placeholder="Search by name">
-        <select ng-model="selectedCategory">
-            <option value="">Select Category</option>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Vegan">Vegan</option>
-            <option value="Side">Side</option>
-            <option value="Seafood">Seafood</option>
-        </select>
-        <!-- Submit Button to apply filters and search -->
-        <button ng-click="getFoodItems()">Submit</button>
-    </div>
+        <!-- Search and Filter Form -->
+        <div class="search-form">
+            <input type="text" ng-model="searchName" placeholder="Search by name" class="search-input">
+            <select ng-model="selectedCategory" class="category-select">
+                <option value="">Select Category</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Side">Side</option>
+                <option value="Seafood">Seafood</option>
+            </select>
+            <button ng-click="getFoodItems()" class="filter-btn">Submit</button>
+        </div>
 
-    <!-- Food Display -->
-    <div ng-repeat="food in foodItems">
-        <div>
-            <img ng-src="{{ food.imagelink }}" alt="{{ food.name }}" class="food-image">
-            <div>
-                <strong>{{ food.name }}</strong> - ${{ food.price }}
-                <br>
-                <label for="quantity{{ food.id }}">Quantity: </label>
-                <input type="number" id="quantity{{ food.id }}" ng-model="food.quantity" min="1" value="1">
-                <button ng-click="addToCart(food, food.quantity)">Add to Cart</button>
+        <!-- Food Display -->
+        <div class="food-list">
+            <div class="food-item" ng-repeat="food in foodItems">
+                <div class="food-image-container">
+                    <img ng-src="{{ food.imagelink }}" alt="{{ food.name }}" class="food-image">
+                </div>
+                <div class="food-details">
+                    <strong class="food-name">{{ food.name }}</strong> - ${{ food.price }}
+                    <br>
+                    <label for="quantity{{ food.id }}" class="quantity-label">Quantity: </label>
+                    <input type="number" id="quantity{{ food.id }}" ng-model="food.quantity" min="1" value="1" class="quantity-input">
+                    <button ng-click="addToCart(food, food.quantity)" class="add-to-cart-btn">Add to Cart</button>
+                </div>
             </div>
         </div>
+
         <hr>
-    </div>
 
-    <h3>Your Cart</h3>
-    <div ng-repeat="cartItem in cart">
-        <p>
-            {{ cartItem.food.name }} (x{{ cartItem.quantity }}) - ${{ (cartItem.food.price * cartItem.quantity).toFixed(2) }}
-            <button ng-click="decreaseQuantity(cartItem)">-</button>
-        </p>
-    </div>
+        <!-- Cart -->
+        <div class="cart-container card">
+            <h3 class="cart-title">Your Cart</h3>
+            <div class="cart-list" ng-repeat="cartItem in cart">
+                <p class="cart-item">
+                    {{ cartItem.food.name }} (x{{ cartItem.quantity }}) - ${{ (cartItem.food.price * cartItem.quantity).toFixed(2) }}
+                    <button ng-click="decreaseQuantity(cartItem)" class="decrease-btn">-</button>
+                </p>
+            </div>
 
-    <div>
-        <strong>Total Price: ${{ calculateTotal() }}</strong>
-    </div>
+            <div class="cart-total">
+                <strong>Total Price: ${{ calculateTotal() }}</strong>
+            </div>
 
-    <button ng-click="submitCart(user.id)">Submit Cart</button>
+            <button ng-click="submitCart(user.id)" class="cta-btn">Submit Cart</button>
+        </div>
 
-    <div class="pagination">
-        <button ng-click="prevPage()" ng-disabled="page === 1">Previous</button>
-        <span>Page {{ page }} of {{ totalPages }}</span>
-        <button ng-click="nextPage()" ng-disabled="page === totalPages">Next</button>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button ng-click="prevPage()" ng-disabled="page === 1" class="pagination-btn">Previous</button>
+            <span class="pagination-info">Page {{ page }} of {{ totalPages }}</span>
+            <button ng-click="nextPage()" ng-disabled="page === totalPages" class="pagination-btn">Next</button>
+        </div>
     </div>
 
 </body>

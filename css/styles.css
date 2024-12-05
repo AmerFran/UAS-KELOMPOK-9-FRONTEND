@@ -985,7 +985,7 @@ section {
 }
 
 .delete-btn {
-    background: #2e8b57;
+    background: red;
     color: #ffffff;
     padding: 10px 20px;
     border: none;
@@ -994,7 +994,7 @@ section {
 }
 
 .delete-btn:hover {
-    background: #0d4805;
+    background: rgb(212, 77, 77);
 }
 
 .userFoods-page {
