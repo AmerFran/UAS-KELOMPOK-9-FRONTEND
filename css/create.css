@@ -140,4 +140,26 @@ h1.title {
     background-color: #218838;
 }
 
+.back-button-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.back-btn {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;  /* Menghapus garis bawah jika menggunakan <a> */
+    display: inline-block;  /* Agar tombol tetap tampil dengan styling */
+}
+
+.back-btn:hover {
+    background-color: #092810;
+}
 
