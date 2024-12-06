@@ -26,7 +26,7 @@
                 <h2>Transaction ID: {{transaction.id}}</h2>
                 <p>Checkout Date: {{transaction.checkout_date | date:'MMMM d, yyyy h:mm a'}}</p>
                 <p>Total Price: {{transaction.total_price | currency}}</p>
-
+                <p>Pickup date: {{transaction.pickup_date| date:'MMMM d, yyyy h:mm a'}}</p>
                 <h3>Items:</h3>
                 <ul>
                     <li ng-repeat="item in transaction.items">
